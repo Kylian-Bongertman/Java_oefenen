@@ -1,6 +1,7 @@
 public class Bestelling {
-    Double price;
     String grootte;
+    Double price;
+
 
     public Bestelling(String grootte) {
         this.grootte = grootte;
@@ -8,7 +9,7 @@ public class Bestelling {
     }
 
     public Double getPrice() {
-        return 0.111;
+        return -1.0;
     }
 }
 
