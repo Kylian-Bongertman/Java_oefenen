@@ -1,7 +1,8 @@
 public enum Saus implements Ingredient {
     KNOFLOOKSAUS("Knoflooksaus", 0.50),
     SAMBAL("Sambal", 0.30),
-    CHILISAUS("Chilisaus", 0.40);
+    CHILISAUS("Chilisaus", 0.40),
+    GEENSAUS("Geen saus", 0.0);
 
     private String naam;
     private Double prijs;

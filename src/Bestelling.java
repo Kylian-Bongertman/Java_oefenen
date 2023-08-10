@@ -3,9 +3,9 @@ public class Bestelling {
     Double price;
 
 
-    public Bestelling(String grootte) {
-        this.grootte = grootte;
-        this.price = getPrijs();
+    public Bestelling() {
+        //this.grootte = grootte;
+        //this.price = getPrijs();
     }
 
     public Double getPrijs() {

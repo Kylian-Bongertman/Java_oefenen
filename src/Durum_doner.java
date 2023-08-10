@@ -1,6 +1,5 @@
 public class Durum_doner extends Bestelling implements Ingredient {
-    Durum_doner(String grootte) {
-        super(grootte);
+    Durum_doner() {
     }
 
     @Override

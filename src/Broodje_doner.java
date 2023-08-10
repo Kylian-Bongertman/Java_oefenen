@@ -1,25 +1,27 @@
 public class Broodje_doner extends Bestelling implements Ingredient {
     private Saus saus = null;
+    private ProductGrootte productGrootte = null;
 
-    Broodje_doner(String grootte) {
-        super(grootte);
+    Broodje_doner() {
+
+        //super(grootte);
     }
 
     @Override
     public Double getPrijs() {
-        if (grootte.equals("Normaal")) {
-            return 5.0;
-        } else if (grootte.equals("Mega")) {
-            return 8.0;
-        } else {
-            return -1.0;
-        }
+        Double totaalPrijs = 0.0;
+        totaalPrijs = productGrootte.getPrijs();
+        totaalPrijs += saus.getPrijs();
+        return totaalPrijs;
     }
     public Saus getSaus() {
         return saus;
     }
-    public void setSauce(Saus saus) {
-        this.saus = saus;
+    public void setSaus(Saus gekozenSaus) {
+        this.saus = gekozenSaus;
+    }
+    public void setProductGrootte(ProductGrootte productGrootte) {
+        this.productGrootte = productGrootte;
     }
 }
 
