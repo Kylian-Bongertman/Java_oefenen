@@ -1,11 +1,12 @@
-public class Broodje_doner extends Bestelling {
-    private String sauce;
+public class Broodje_doner extends Bestelling implements Ingredient {
+    private Saus saus = null;
+
     Broodje_doner(String grootte) {
         super(grootte);
     }
 
     @Override
-    public Double getPrice() {
+    public Double getPrijs() {
         if (grootte.equals("Normaal")) {
             return 5.0;
         } else if (grootte.equals("Mega")) {
@@ -14,10 +15,13 @@ public class Broodje_doner extends Bestelling {
             return -1.0;
         }
     }
-    public String getSauce() {
-        return "We hebben knoflooksaus, yoghurtsaus, pittige saus en tahini.";
+    public Saus getSaus() {
+        return saus;
     }
-    public void setSauce(String chosenSauce) {
-        this.sauce = chosenSauce;
+    public void setSauce(Saus saus) {
+        this.saus = saus;
     }
 }
+
+//Feature requests:
+//Doner donderdag 1 euro korting

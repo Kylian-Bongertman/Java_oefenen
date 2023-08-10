@@ -5,10 +5,10 @@ public class Bestelling {
 
     public Bestelling(String grootte) {
         this.grootte = grootte;
-        this.price = getPrice();
+        this.price = getPrijs();
     }
 
-    public Double getPrice() {
+    public Double getPrijs() {
         return -1.0;
     }
 }

@@ -14,10 +14,10 @@ public class Store {
 
         if (product.equals("Broodje doner")) {
             bestelling = new Broodje_doner(grootte);
-            String availableSauce = ((Broodje_doner) bestelling).getSauce();
-            System.out.println("Welke saus wil je? Beschikbare sauzen: " + availableSauce);
-            String chosenSauce = scanner.nextLine();
-            ((Broodje_doner) bestelling).setSauce(chosenSauce);
+            System.out.println("Kies de saus die je wilt toevoegen: " + Saus.getNamen());
+            String chosenSauceString = scanner.nextLine();
+            ((Broodje_doner) bestelling).setSauce(Saus.valueOf(chosenSauceString.toUpperCase()));
+            System.out.println("De gekozen saus is: " + ((Broodje_doner) bestelling).getSaus());
         }
         else if(product.equals("Durum doner")) {
             bestelling = new Durum_doner(grootte);
@@ -25,9 +25,9 @@ public class Store {
             // Voeg hier andere mogelijke producten toe
             bestelling = new Bestelling(grootte);
         }
-
         return bestelling;
     }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -40,12 +40,8 @@ public class Store {
         String besteldeGrootte = scanner.nextLine();
 
         Bestelling kylianbestelling = donerIX.takeOrder(product, besteldeGrootte, scanner);
-        System.out.println("Bedankt voor je bestelling, dat wordt dan " + kylianbestelling.price + " Euro");
+        System.out.println("Bedankt voor je bestelling, dat wordt dan " + kylianbestelling.getPrijs() + " Euro");
 
         scanner.close();
     }
-
-
-
-
 }
