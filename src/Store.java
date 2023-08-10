@@ -24,6 +24,11 @@ public class Store {
 
             System.out.println("De gekozen saus is: " + ((Broodje_doner) bestelling).getSaus());
 
+            System.out.println("Welke salade wil je? " + Salade.getNamen());
+            String gekozenSaladeString = scanner.nextLine();
+            bestelling.addSalade(Salade.valueOf(gekozenSaladeString));
+            System.out.println(bestelling.getSalades());
+
             return bestelling;
         }
         else if(product.equals("Durum doner")) {

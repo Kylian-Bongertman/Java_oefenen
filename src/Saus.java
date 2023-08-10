@@ -1,4 +1,4 @@
-public enum Saus implements Ingredient {
+public enum Saus {
     KNOFLOOKSAUS("Knoflooksaus", 0.50),
     SAMBAL("Sambal", 0.30),
     CHILISAUS("Chilisaus", 0.40),
@@ -21,7 +21,7 @@ public enum Saus implements Ingredient {
         return namen;
     }
 
-    @Override
+    //@Override
     public Double getPrijs() {
         return this.prijs;
     }

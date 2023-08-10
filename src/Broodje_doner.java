@@ -1,9 +1,9 @@
-public class Broodje_doner extends Bestelling implements Ingredient {
+public class Broodje_doner extends Bestelling {
     private Saus saus = null;
     private ProductGrootte productGrootte = null;
+    private Salade[] salades = new Salade[3];
 
     Broodje_doner() {
-
         //super(grootte);
     }
 
@@ -14,14 +14,34 @@ public class Broodje_doner extends Bestelling implements Ingredient {
         totaalPrijs += saus.getPrijs();
         return totaalPrijs;
     }
+
     public Saus getSaus() {
         return saus;
     }
+
     public void setSaus(Saus gekozenSaus) {
         this.saus = gekozenSaus;
     }
+
+    public ProductGrootte getProductGrootte() {
+        return productGrootte;
+    }
+
     public void setProductGrootte(ProductGrootte productGrootte) {
         this.productGrootte = productGrootte;
+    }
+
+    public void addSalade(Salade salade) {
+        //this.salades[this.salades.length] = salade;
+        this.salades[0] = salade;
+    }
+
+    public String getSalades() {
+        String saladeString = "";
+        for(Salade salade : salades) {
+            saladeString += salade.name();
+        }
+        return saladeString;
     }
 }
 
