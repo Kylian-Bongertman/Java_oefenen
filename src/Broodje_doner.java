@@ -2,9 +2,11 @@ public class Broodje_doner extends Bestelling {
     private Saus saus = null;
     private ProductGrootte productGrootte = null;
     private Salade[] salades = new Salade[3];
+    private int saladeCount = 0;
 
     Broodje_doner() {
         //super(grootte);
+
     }
 
     @Override
@@ -33,7 +35,8 @@ public class Broodje_doner extends Bestelling {
 
     public void addSalade(Salade salade) {
         //this.salades[this.salades.length] = salade;
-        this.salades[0] = salade;
+        this.salades[saladeCount] = salade;
+        saladeCount++;
     }
 
     public String getSalades() {
