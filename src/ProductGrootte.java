@@ -1,6 +1,9 @@
 public enum ProductGrootte {
-    NORMAAL("Normaal", 5.0),
-    MEGA("Mega", 8.0);
+    BROODJE_DONER_NORMAAL("Broodje doner Normaal", 5.0),
+    BROODJE_DONER_MEGA("Broodje doner Mega", 8.0),
+
+    DURUM_DONER_NORMAAL("Durum doner normaal", 4.5),
+    DURUM_DONER_MEGA("Durum doner mega", 7.0);
 
     private String naam;
     private Double prijs;
