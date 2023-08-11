@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Store {
@@ -9,33 +11,51 @@ public class Store {
         System.out.println("--------------------------");
     }
 
-    public DonerProduct takeOrder(String product, Scanner scanner) {
+    public DonerProduct takeOrder() {
         DonerProduct bestelling = null;
-        if (product.equals("Broodje doner")) {
-            bestelling = new DonerProduct("BROODJE_DONER_");
-            return bestelling;
+        bestelling = new DonerProduct();
+        return bestelling;
 
-        } else if (product.equals("Durum doner")) {
-            bestelling = new DonerProduct("DURUM_DONER_");
-                return bestelling;
-        }
+
+//        if (product.equals("Broodje doner")) {
+//            bestelling = new DonerProduct("BROODJE_DONER_");
+//            return bestelling;
+//
+//        } else if (product.equals("Durum doner")) {
+//            bestelling = new DonerProduct("DURUM_DONER_");
+//            return bestelling;
+//        }
 
         // Voeg hier andere mogelijke producten toe
-        return new DonerProduct("");
+//        return new DonerProduct("");
 
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        boolean nieuweBestellingMaken = true;
+        List<DonerProduct> bestellingen = new ArrayList<>(); // Lijst voor bestellingen
+        Double totaalPrijsBestellingen = 0.0;
 
         Store donerIX = new Store();
 
-        System.out.println("Kies het product (Broodje doner/Durum doner):");
-        String product = scanner.nextLine();
+        while (nieuweBestellingMaken == true) {
+            DonerProduct kylianbestelling = donerIX.takeOrder();
 
-        DonerProduct kylianbestelling = donerIX.takeOrder(product, scanner);
-        System.out.println("Bedankt voor je bestelling, dat wordt dan " + kylianbestelling.getPrijs() + " Euro");
+            System.out.println("Bedankt voor je bestelling, de tussentijdse prijs is: " + kylianbestelling.getPrijs() + " Euro");
+            bestellingen.add(kylianbestelling);
+            System.out.println("Wil u nog wat bestellen? (y/n)");
+            String nieuweBestellingKeuze = scanner.nextLine();
+            if (nieuweBestellingKeuze.equals("y")) {
+                nieuweBestellingMaken = true;
+            } else {
+                nieuweBestellingMaken = false;
+            }
+        }
 
-        scanner.close();
+        for(DonerProduct bestelling : bestellingen) {
+            totaalPrijsBestellingen += bestelling.getPrijs();
+        }
+        System.out.println("Bedankt voor je bestelling, dat wordt dan: " + totaalPrijsBestellingen + " Euro"); //Som van bestellingen
     }
 }

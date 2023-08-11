@@ -6,8 +6,13 @@ public class DonerProduct {
     protected Salade[] salades = new Salade[3];
     protected int saladeCount = 0;
 
-    DonerProduct(String productKeuze) {
+    DonerProduct() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Kies het product (Broodje doner/Durum doner):");
+        String productKeuze = scanner.nextLine().toUpperCase();
+        if(productKeuze.equals("BROODJE DONER")) { productKeuze = "BROODJE_DONER_"; }
+        else if (productKeuze.equals("DURUM DONER")) { productKeuze = "DURUM_DONER_"; }
+
         System.out.println("Kies de grootte van de bestelling (Normaal/Mega):");
         String gekozenGrootteString = scanner.nextLine();
         ProductGrootte grootte = ProductGrootte.valueOf(productKeuze + gekozenGrootteString.toUpperCase()); //kan DURUM_DONER_ of BROODJE zijn afhankelijk van keuze
@@ -19,13 +24,12 @@ public class DonerProduct {
 
         System.out.println("De gekozen saus is: " + getSaus());
 
-        System.out.println("Welke salade wil je? " + Salade.getNamen());
+        System.out.println("Welke salade wil je? (Je mag er 3 kiezen). We hebben: " + Salade.getNamen());
         for (int i = 0; i < 3; i++) {
             String gekozenSaladeString = scanner.nextLine();
             addSalade(Salade.valueOf(gekozenSaladeString.toUpperCase()));
         }
-        System.out.println(getSalades());
-
+        System.out.println("De gekozen salades zijn: " + getSalades());
     }
 
     public Double getPrijs() {
@@ -59,7 +63,7 @@ public class DonerProduct {
     public String getSalades() {
         String saladeString = "";
         for(Salade salade : salades) {
-            saladeString += salade.name();
+            saladeString += salade.name() + ", ";
         }
         return saladeString;
     }
