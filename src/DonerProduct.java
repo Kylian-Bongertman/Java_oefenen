@@ -50,7 +50,7 @@ public class DonerProduct extends Product {
         ProductGrootte grootte = ProductGrootte.valueOf(productKeuze + gekozenGrootteString.toUpperCase()); //kan DURUM_DONER_ of BROODJE zijn afhankelijk van keuze
         setProductGrootte(grootte);
     }
-
+//
     private String kiesDonerProduct() {
         System.out.println("Kies het product (Broodje doner/Durum doner):");
         String productKeuze = scanner.nextLine().toUpperCase();
