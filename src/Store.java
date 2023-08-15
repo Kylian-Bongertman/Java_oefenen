@@ -12,11 +12,10 @@ public class Store {
         System.out.println("--------------------------");
     }
 
-    public DonerProduct takeOrder(String product) {
+    public Product takeOrder(String product) {
 
         if(product.equals("DonerProduct")) {
-            DonerProduct bestelling;
-            bestelling = new DonerProduct();
+            DonerProduct bestelling = new DonerProduct();
             return bestelling;
         }
 //        else if(product.equals("Drinken")) {
@@ -41,27 +40,27 @@ return null;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        boolean nieuweBestellingMaken = true;
-        List<DonerProduct> bestelling = new ArrayList<>(); // Lijst voor bestelling
+        boolean isNieuweBestellingMaken = true;
+        List<Product> bestelling = new ArrayList<>(); // Lijst voor bestelling
         Double totaalPrijsBestelling = 0.0;
 
         Store donerIX = new Store();
 
-        while (nieuweBestellingMaken) {
-            DonerProduct kylianbestelling = donerIX.takeOrder("DonerProduct");
+        while (isNieuweBestellingMaken) {
+            Product kylianbestelling = donerIX.takeOrder("DonerProduct");
 
             System.out.println("Bedankt voor je bestelling, de tussentijdse prijs is: " + kylianbestelling.getPrijs() + " Euro");
             bestelling.add(kylianbestelling);
             System.out.println("Wil u nog wat bestellen? (y/n)");
             String nieuweBestellingKeuze = scanner.nextLine();
             if (nieuweBestellingKeuze.equals("y")) {
-                nieuweBestellingMaken = true;
+                isNieuweBestellingMaken = true;
             } else {
-                nieuweBestellingMaken = false;
+                isNieuweBestellingMaken = false;
             }
         }
 
-        for(DonerProduct item : bestelling) {
+        for(Product item : bestelling) {
             totaalPrijsBestelling += item.getPrijs();
         }
         System.out.println("Bedankt voor je bestelling, dat wordt dan: " + totaalPrijsBestelling + " Euro"); //Som van bestelling
