@@ -8,23 +8,18 @@ public class Store {
 
     public Product takeOrder(String productKeuze) {
         if(productKeuze.equals("BROODJE_DONER_")) {
-            DonerProduct bestelling = new DonerProduct("Broodje doner");
+            DonerProduct bestelling = new DonerProduct(productKeuze);
             return bestelling;
         }
         else if(productKeuze.equals("DURUM_DONER_")) {
-            DonerProduct bestelling = new DonerProduct("Durum doner");
+            DonerProduct bestelling = new DonerProduct(productKeuze);
             return bestelling;
         }
         else if(productKeuze.equals("COLA_")) {
-            Drinken bestelling = new Drinken("Cola");
+            Drinken bestelling = new Drinken(productKeuze);
             return bestelling;
         }
 
-//        else if(product.equals("Drinken")) {
-//            Drinken bestelling = null;
-//            bestelling = new Drinken();
-//            return bestelling;
-//        }
         return null;
     }
     protected String getProductKeuze() {
@@ -39,15 +34,14 @@ public class Store {
     }
 
     public static void main(String[] args) {
-        toonMenu();
         Scanner scanner = new Scanner(System.in);
         boolean isNieuweBestellingMaken = true;
         List<Product> bestelling = new ArrayList<>(); // Lijst voor bestelling
-        Double totaalPrijsBestelling = 0.0;
 
         Store donerIX = new Store();
 
         while (isNieuweBestellingMaken) {
+            toonMenu();
             String productKeuze = donerIX.getProductKeuze();
             Product nieuwItem = donerIX.takeOrder(productKeuze);
 
@@ -61,10 +55,18 @@ public class Store {
                 isNieuweBestellingMaken = false;
             }
         }
+        printKassaBon(bestelling);
+    }
 
+    private static void printKassaBon(List<Product> bestelling) {
+        Double totaalPrijsBestelling = 0.0;
+
+        System.out.println("--------------------Bestelling--------------------");
         for(Product item : bestelling) {
             totaalPrijsBestelling += item.getPrijs();
+            System.out.println("Naam: " + item.productGrootte.getNaam() + " | prijs: " + item.getPrijs());
         }
+        System.out.println("--------------------------------------------------");
         System.out.println("Bedankt voor je bestelling, dat wordt dan: " + totaalPrijsBestelling + " Euro"); //Som van bestelling
     }
 

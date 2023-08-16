@@ -5,8 +5,8 @@ public enum ProductGrootte {
     DURUM_DONER_NORMAAL("Durum doner normaal", 4.5),
     DURUM_DONER_MEGA("Durum doner mega", 7.0),
 
-    COLA_NORMAAL("Cola", 3.0),
-    COLA_MEGA("Cola", 4.0);
+    COLA_NORMAAL("Cola normaal", 3.0),
+    COLA_MEGA("Cola mega", 4.0);
 
     private String naam;
     private Double prijs;
@@ -18,6 +18,10 @@ public enum ProductGrootte {
 
     public Double getPrijs() {
         return this.prijs;
+    }
+
+    public String getNaam() {
+        return naam;
     }
 }
 
