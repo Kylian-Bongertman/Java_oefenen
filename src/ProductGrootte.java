@@ -16,21 +16,17 @@ public enum ProductGrootte {
         this.prijs = prijs;
     }
 
-    public static void setKorting() {
-    } //Static of niet Static??
-
-
     public Double getPrijs() {
         return this.prijs;
     }
 
     public String getNaam() { return naam; }
 
-    public void setKorting(double percentage) {
-        if(naam.contains("doner")) {
-            double kortingsBedrag = prijs * (percentage / 100);
-            this.prijs -= kortingsBedrag;
-        }
-    }
+//    public void setKorting(double percentage) {
+//        if(naam.contains("doner")) {
+//            double kortingsBedrag = prijs * (percentage / 100);
+//            this.prijs -= kortingsBedrag;
+//        }
+//    }
 }
 

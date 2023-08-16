@@ -41,16 +41,20 @@ public class Store {
         List<Product> bestelling = new ArrayList<>(); // Lijst voor bestelling
 
         Store donerIX = new Store();
-        isDonerDonderdag = checkDonerDonderdag(); // Op donderdag 10% korting op Doner producten
-        if(isDonerDonderdag) {
-            donerIX.setDonerKortingPercentage(10);
-        }
+//        isDonerDonderdag = checkDonerDonderdag(); // Op donderdag 10% korting op Doner producten
+//        if(isDonerDonderdag) {
+//            donerIX.setDonerKortingPercentage(10);
+//        }
 
         while (isNieuweBestellingMaken) {
             toonMenu();
             String productKeuze = donerIX.getProductKeuze();
             Product nieuwItem = donerIX.takeOrder(productKeuze);
 
+            if(nieuwItem == null) {
+                System.out.println("Dit staat niet op het menu");
+
+            }
             System.out.println("Bedankt voor je bestelling, de prijs van dit item is: " + nieuwItem.getPrijs() + " Euro");
             bestelling.add(nieuwItem);
             System.out.println("Wil u nog wat bestellen? (y/n)");
@@ -64,9 +68,9 @@ public class Store {
         printKassaBon(bestelling);
     }
 
-    private void setDonerKortingPercentage(double percentage) {
-        ProductGrootte.setKorting(percentage);
-    }
+//    private void setDonerKortingPercentage(double percentage) {
+//        ProductGrootte.setKorting(percentage);
+//    }
 
     private static boolean checkDonerDonderdag() {
         boolean isDonerDonderdag = false;
