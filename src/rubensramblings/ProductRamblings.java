@@ -1,9 +1,9 @@
 package rubensramblings;
 
-public class Product {
+public class ProductRamblings {
     private Double prijs;
 
-    public Product(Double prijs) {
+    public ProductRamblings(Double prijs) {
         this.prijs = prijs;
     }
 

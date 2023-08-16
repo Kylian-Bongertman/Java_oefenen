@@ -1,9 +1,9 @@
 package rubensramblings;
 
-public class DonerProduct extends Product{
+public class DonerProductRamblingsRamblings extends ProductRamblings {
     private boolean isExtraGroot;
 
-    public DonerProduct(Double prijs, boolean isExtraGroot) {
+    public DonerProductRamblingsRamblings(Double prijs, boolean isExtraGroot) {
         super(prijs);
         this.isExtraGroot = isExtraGroot;
     }

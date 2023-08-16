@@ -1,7 +1,7 @@
 package rubensramblings;
 
-public class BroodjeDonerRamblings extends DonerProduct{
-    public BroodjeDonerRamblings(Double prijs, boolean isExtraGroot) {
+public class BroodjeRamblingsDonerRamblings extends DonerProductRamblingsRamblings {
+    public BroodjeRamblingsDonerRamblings(Double prijs, boolean isExtraGroot) {
         super(prijs, isExtraGroot);
     }
 
