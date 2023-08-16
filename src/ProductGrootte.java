@@ -20,8 +20,13 @@ public enum ProductGrootte {
         return this.prijs;
     }
 
-    public String getNaam() {
-        return naam;
-    }
+    public String getNaam() { return naam; }
+
+//    public void setKorting(double percentage) {
+//        if(naam.contains("doner")) {
+//            double kortingsBedrag = prijs * (percentage / 100);
+//            this.prijs -= kortingsBedrag;
+//        }
+//    }
 }
 

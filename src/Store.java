@@ -1,6 +1,7 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.*;
 
 public class Store {
     public Store() {
@@ -36,15 +37,24 @@ public class Store {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean isNieuweBestellingMaken = true;
+        boolean isDonerDonderdag = false;
         List<Product> bestelling = new ArrayList<>(); // Lijst voor bestelling
 
         Store donerIX = new Store();
+//        isDonerDonderdag = checkDonerDonderdag(); // Op donderdag 10% korting op Doner producten
+//        if(isDonerDonderdag) {
+//            donerIX.setDonerKortingPercentage(10);
+//        }
 
         while (isNieuweBestellingMaken) {
             toonMenu();
             String productKeuze = donerIX.getProductKeuze();
             Product nieuwItem = donerIX.takeOrder(productKeuze);
 
+            if(nieuwItem == null) {
+                System.out.println("Dit staat niet op het menu");
+
+            }
             System.out.println("Bedankt voor je bestelling, de prijs van dit item is: " + nieuwItem.getPrijs() + " Euro");
             bestelling.add(nieuwItem);
             System.out.println("Wil u nog wat bestellen? (y/n)");
@@ -56,6 +66,24 @@ public class Store {
             }
         }
         printKassaBon(bestelling);
+    }
+
+//    private void setDonerKortingPercentage(double percentage) {
+//        ProductGrootte.setKorting(percentage);
+//    }
+
+    private static boolean checkDonerDonderdag() {
+        boolean isDonerDonderdag = false;
+        LocalDate currentDate = LocalDate.now();
+        DayOfWeek currentDayOfWeek = currentDate.getDayOfWeek();
+        String dayOfWeekString = currentDayOfWeek.getDisplayName(TextStyle.FULL, new Locale("nl", "NL")); // Stijlvolle weergave van de huidige dag van de week (bijv. "Maandag", "Dinsdag", enz.)
+
+        System.out.println("Huidige dag van de week: " + dayOfWeekString);
+        if(dayOfWeekString.equals("woensdag")) {
+            isDonerDonderdag = true;
+            System.out.println("Het is Doner donderdag, Dit betekend: 10% korting op alle Doner producten!");
+        }
+        return isDonerDonderdag;
     }
 
     private static void printKassaBon(List<Product> bestelling) {

@@ -1,6 +1,5 @@
 public class Drinken extends Product {
     Drinken(String productKeuze) {
-       // String productKeuze = getProductKeuze(); //keuze uit: cola, de rest is uitverkocht
         kiesGrootte(productKeuze); // Normaal of Mega grootte
         maakProduct(); // product maken voor klant
     }

@@ -1,15 +1,11 @@
 import java.util.concurrent.TimeUnit;
 
 public class DonerProduct extends Product {
-    //protected Scanner scanner = new Scanner(System.in);
-    //protected ProductGrootte productGrootte = null;
     protected Saus saus = null;
     protected Salade[] salades = new Salade[3]; // Je moet 3 salades kiezen
     protected int saladeCount = 0;
 
-
     DonerProduct(String productKeuze) {
-        //String productKeuze = getProductKeuze(); // Gebruiker kiest: Broodje doner of Durum doner
         kiesGrootte(productKeuze); // Normaal of Mega grootte
         kiesSaus(); // Saus toevoegen
         kiesSalade(); // Salade toevoegen
