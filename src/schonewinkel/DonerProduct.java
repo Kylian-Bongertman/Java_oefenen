@@ -10,8 +10,6 @@ public class DonerProduct extends Product{
     public void setIsExtraGroot(double isExtraGroot) {
         this.isExtraGroot = isExtraGroot;
     }
-
-
-    }
+}
 
 
