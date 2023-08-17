@@ -1,6 +1,6 @@
 package schonewinkel;
 
-public class DonerProduct extends Product{
+public class DonerProduct extends Product {
     protected boolean isExtraGroot;
     protected String saus;
 
@@ -9,7 +9,6 @@ public class DonerProduct extends Product{
         saus = KassaMedewerker.getSaus();
 
     }
-
 
     public boolean getIsExtraGroot() {
         return isExtraGroot;

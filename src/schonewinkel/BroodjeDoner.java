@@ -1,12 +1,11 @@
 package schonewinkel;
 
-public class BroodjeDoner extends DonerProduct{
+public class BroodjeDoner extends DonerProduct {
     BroodjeDoner() {
-        if(isExtraGroot) {
+        if (isExtraGroot) {
             naam = "Broodje doner mega";
             prijs = 8.0;
-        }
-        else {
+        } else {
             naam = "Broodje doner";
             prijs = 5.0;
         }
