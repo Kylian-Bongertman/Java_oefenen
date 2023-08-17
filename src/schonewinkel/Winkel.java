@@ -26,7 +26,6 @@ public class Winkel {
                 isNieuweBestelling = nieuweBestellingKeuze.equals("y"); // Als gebruiker "y" antwoord → plaats nieuwe bestelling
             }
             printKassaBon(bestelling);
-        // Geef prijs weer
     }
 
     private static void printKassaBon(List<Product> bestelling) {
@@ -46,14 +45,11 @@ public class Winkel {
         System.out.println("Broodje doner | Durum doner");
         System.out.println("Cola          |            ");
         System.out.println("--------------------------");
-        // Laat menu zien
     }
     public static Product neemBestellingAan() {
         Scanner scanner = new Scanner(System.in);
-        boolean isNieuweBestelling = true;
         String besteldProduct = scanner.nextLine();
 
-        //while(isNieuweBestelling == true) {
             if (besteldProduct.equals("Broodje doner")) {
                 BroodjeDoner broodje = new BroodjeDoner();
                 return broodje;
@@ -65,18 +61,7 @@ public class Winkel {
                 return neemBestellingAan();
             }
         }
-            //return neemBestellingAan();
-
-            // Vraag gebruiker input
-            // Staat dit op het menu?
-            // Maak Product aan wat gebruiker vraagt
-
     }
 
-//getprijs maken voor broodje
-//lijst maken
-//totaalprijs berekenen
-//getprijs maken voor durum
-//if broodje / else if durum
 
 

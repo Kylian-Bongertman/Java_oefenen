@@ -1,12 +1,13 @@
 package schonewinkel;
 
 public class DurumDoner extends DonerProduct{
-
+    DurumDoner() {
+        naam = "Durum doner";
+        prijs = 4.5;
+    }
 
     @Override
     public double getPrijs() {
-        double totaalPrijs = 0.0;
-        totaalPrijs += 4.5;
-        return totaalPrijs;
+        return this.prijs;
     }
 }
