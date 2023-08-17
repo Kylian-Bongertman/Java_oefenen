@@ -1,4 +1,4 @@
-import java.util.concurrent.TimeUnit;
+package eerstewinkel;
 
 public class DonerProduct extends Product {
     protected Saus saus = null;

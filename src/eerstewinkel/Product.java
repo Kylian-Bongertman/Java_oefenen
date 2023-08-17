@@ -1,3 +1,5 @@
+package eerstewinkel;
+
 import java.util.Scanner;
 
 public class Product {
