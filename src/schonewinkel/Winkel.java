@@ -41,10 +41,10 @@ public class Winkel {
     }
 
     public static void toonMenu() {
-        System.out.println("---------- Menu ----------");
+        System.out.println("------------ Menu ------------");
         System.out.println("Broodje doner | Durum doner");
         System.out.println("Cola          |            ");
-        System.out.println("--------------------------");
+        System.out.println("------------------------------");
     }
     public static Product neemBestellingAan() {
         Scanner scanner = new Scanner(System.in);
@@ -64,4 +64,6 @@ public class Winkel {
     }
 
 
-
+// Vraag gebruiker om grootte
+// Als extra groot, dan is prijs 8.0
+// isExtragroot voor broodje maken

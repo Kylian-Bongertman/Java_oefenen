@@ -1,13 +1,21 @@
 package schonewinkel;
 
 public class DonerProduct extends Product{
-    private double isExtraGroot;
+    protected boolean isExtraGroot;
+    protected String saus;
 
-    public double getIsExtraGroot() {
+    DonerProduct() {
+        isExtraGroot = KassaMedewerker.getDonerGrootte();
+        saus = KassaMedewerker.getSaus();
+
+    }
+
+
+    public boolean getIsExtraGroot() {
         return isExtraGroot;
     }
 
-    public void setIsExtraGroot(double isExtraGroot) {
+    public void setIsExtraGroot(boolean isExtraGroot) {
         this.isExtraGroot = isExtraGroot;
     }
 }
