@@ -11,9 +11,9 @@ public class BroodjeDoner extends DonerProduct {
         }
     }
 
-    @Override
-    public double getPrijs() {
-        return this.prijs;
-    }
+//    @Override
+//    public double getPrijs() {
+//        return this.prijs;
+//    }
 }
 

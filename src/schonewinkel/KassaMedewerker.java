@@ -43,6 +43,7 @@ public class KassaMedewerker {
         for (int i = 0; i < beschikbareSaus.length; i++) {
             System.out.print(beschikbareSaus[i] + ", ");
         }
+        System.out.println();
         gekozenSaus = scanner.nextLine();
 
         for (int i = 0; i < beschikbareSaus.length; i++) {

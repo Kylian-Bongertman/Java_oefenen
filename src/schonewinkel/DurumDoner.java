@@ -11,8 +11,8 @@ public class DurumDoner extends DonerProduct {
         }
     }
 
-    @Override
-    public double getPrijs() {
-        return this.prijs;
-    }
+//    @Override
+//    public double getPrijs() {
+//        return this.prijs;
+//    }
 }

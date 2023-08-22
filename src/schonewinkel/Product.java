@@ -13,7 +13,7 @@ public class Product {
     }
 
     public double getPrijs() {
-        return prijs;
+        return this.prijs;
     }
 
     public void setPrijs(double prijs) {
