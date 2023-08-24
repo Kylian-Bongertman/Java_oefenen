@@ -34,20 +34,24 @@ public class KassaMedewerker {
         }
     }
 
-    public static String getSaus() {
+    public static Saus getSaus() {
         Scanner scanner = new Scanner(System.in);
-        String gekozenSaus = "";
-        String[] beschikbareSaus = Saus.getBeschikbareSaus();
+        String naamGekozenSaus = "";
+        Saus gekozenSaus = new Saus();
+        String[] beschikbareSaus = SausOpties.getBeschikbareSauzen();
+        Double[] prijsSaus = SausOpties.getPrijsSauzen();
 
         System.out.println("Kies de saus: ");
         for (int i = 0; i < beschikbareSaus.length; i++) {
-            System.out.print(beschikbareSaus[i] + ", ");
+            System.out.print(beschikbareSaus[i] + ": $" + prijsSaus[i] + ", ");
         }
         System.out.println();
-        gekozenSaus = scanner.nextLine();
+        naamGekozenSaus = scanner.nextLine();
 
         for (int i = 0; i < beschikbareSaus.length; i++) {
-            if (gekozenSaus.equals(beschikbareSaus[i])) {
+            if (naamGekozenSaus.equals(beschikbareSaus[i])) {
+                gekozenSaus.setNaamSaus(beschikbareSaus[i]);
+                gekozenSaus.setPrijsSaus(prijsSaus[i]);
                 return gekozenSaus;
             }
         }

@@ -1,12 +1,22 @@
 package schonewinkel;
 
 public class Saus {
-    static String[] beschikbareSaus = {"Knoflook Saus", "Sambal", "Chilisaus", "Geen Saus"};
-    static Double[] prijsSaus = { 0.3, 0.4, 0.5, 0.6};
+    private String naamSaus = "";
+    private Double prijsSaus = 0.0;
 
-    public static String[] getBeschikbareSaus() {
-        return beschikbareSaus;
+    public void setNaamSaus(String naamSaus) {
+        this.naamSaus = naamSaus;
     }
 
+    public void setPrijsSaus(Double prijsSaus) {
+        this.prijsSaus = prijsSaus;
+    }
 
+    public String getNaamSaus() {
+        return naamSaus;
+    }
+
+    public Double getPrijsSaus() {
+        return prijsSaus;
+    }
 }
