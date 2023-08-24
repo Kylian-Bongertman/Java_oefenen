@@ -1,7 +1,7 @@
 package schonewinkel;
 
 public class Product {
-    protected String naam = "";
+    protected String naam = "Product";
     protected double prijs = 0.0;
 
     public String getNaam() {
