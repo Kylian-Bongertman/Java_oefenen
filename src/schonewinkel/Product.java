@@ -19,4 +19,6 @@ public class Product {
     public void setPrijs(double prijs) {
         this.prijs = prijs;
     }
+
+
 }

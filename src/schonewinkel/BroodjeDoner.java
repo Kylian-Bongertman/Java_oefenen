@@ -1,7 +1,7 @@
 package schonewinkel;
 
 public class BroodjeDoner extends DonerProduct {
-    BroodjeDoner() {
+    public BroodjeDoner() {
         if (isExtraGroot) {
             naam = "Broodje doner mega";
             prijs = 8.0;
@@ -11,6 +11,11 @@ public class BroodjeDoner extends DonerProduct {
         }
         addSaus();
 
+    }
+
+    @Override
+    public double getPrijs() {
+        return prijs + getSausPrijs();
     }
 }
 

@@ -10,6 +10,7 @@ public class Winkel {
         List<Product> bestelling = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         boolean isNieuweBestelling = true;
+        KassaMedewerker Tycho = new KassaMedewerker();
 
         System.out.println("Welkom bij DonerIX!");
         System.out.println("Mag ik uw bestelling?");
@@ -34,7 +35,14 @@ public class Winkel {
         System.out.println("--------------------Bestelling--------------------");
         for (Product item : bestelling) {
             totaalPrijsBestelling += item.getPrijs();
-            System.out.println("Naam: " + item.getNaam() + " | prijs: " + item.getPrijs());
+            if (item instanceof DonerProduct) {
+                DonerProduct donerProduct = (DonerProduct) item;
+                String sausToevoeging = "| Saus:" + donerProduct.getSausNaam();
+                System.out.println("Naam: " + item.getNaam() + " " + sausToevoeging + " | prijs: " + item.getPrijs());
+            }
+            else{
+                System.out.println("Naam: " + item.getNaam() + " | prijs: " + item.getPrijs());
+            }
         }
         System.out.println("--------------------------------------------------");
         System.out.println("Bedankt voor je bestelling, dat wordt dan: " + totaalPrijsBestelling + " Euro"); //Som van bestelling
