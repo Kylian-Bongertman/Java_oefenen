@@ -6,7 +6,7 @@ public class KassaMedewerker {
     String[] productNamen = FrisdrankMenu.getFrisdrankNamen();
     Double[] productPrijzen = FrisdrankMenu.getFrisdrankPrijzen();
 
-    public static Product neemBestellingAan() {
+    public Product neemBestellingAan() {
         Scanner scanner = new Scanner(System.in);
         String besteldProduct = scanner.nextLine();
         String[] frisdrankNamen = FrisdrankMenu.getFrisdrankNamen();
@@ -22,60 +22,66 @@ public class KassaMedewerker {
             }
         }
         if (besteldProduct.equals("Broodje doner")) {
-            BroodjeDoner broodje = new BroodjeDoner();
+            boolean gekozenGrootte = getDonerGrootte();
+            Saus gekozenSaus = getSaus();
+
+            BroodjeDoner broodje = new BroodjeDoner(gekozenGrootte, gekozenSaus);
             return broodje;
         } else if (besteldProduct.equals("Durum doner")) {
-            DurumDoner durum = new DurumDoner();
+            boolean gekozenGrootte = getDonerGrootte();
+            Saus gekozenSaus = getSaus();
+
+            DurumDoner durum = new DurumDoner(gekozenGrootte, gekozenSaus);
             return durum;
         } else {
-                System.out.println("Dit staat niet op het menu!");
-                return neemBestellingAan();
+            System.out.println("Dit staat niet op het menu!");
+            return neemBestellingAan();
+        }
+    }
+
+    public boolean getDonerGrootte() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Kies de grootte: (Normaal/Mega)");
+        String gekozenGrootte = scanner.nextLine();
+        if (gekozenGrootte.equals("Mega")) {
+            return true;
+        } else if (gekozenGrootte.equals("Normaal")) {
+            return false;
+        } else {
+            System.out.println("Deze grootte bestaat niet!");
+            return getDonerGrootte();
+        }
+    }
+
+    public Saus getSaus() {
+        Scanner scanner = new Scanner(System.in);
+        String naamGekozenSaus = "";
+        Saus gekozenSaus = new Saus();
+        String[] beschikbareSaus = SausMenu.getSausNamen();
+        Double[] prijsSaus = SausMenu.getSausPrijzen();
+
+        System.out.println("Kies de saus: ");
+        for (int i = 0; i < beschikbareSaus.length; i++) {
+            System.out.print(beschikbareSaus[i] + ": $" + prijsSaus[i] + ", ");
+        }
+        System.out.println();
+        naamGekozenSaus = scanner.nextLine();
+
+        for (int i = 0; i < beschikbareSaus.length; i++) {
+            if (naamGekozenSaus.equals(beschikbareSaus[i])) {
+                gekozenSaus.setNaamSaus(beschikbareSaus[i]);
+                gekozenSaus.setPrijsSaus(prijsSaus[i]);
+                return gekozenSaus;
             }
         }
-
-        public static boolean getDonerGrootte () {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Kies de grootte: (Normaal/Mega)");
-            String gekozenGrootte = scanner.nextLine();
-            if (gekozenGrootte.equals("Mega")) {
-                return true;
-            } else if (gekozenGrootte.equals("Normaal")) {
-                return false;
-            } else {
-                System.out.println("Deze grootte bestaat niet!");
-                return getDonerGrootte();
-            }
-        }
-
-        public static Saus getSaus () {
-            Scanner scanner = new Scanner(System.in);
-            String naamGekozenSaus = "";
-            Saus gekozenSaus = new Saus();
-            String[] beschikbareSaus = SausMenu.getSausNamen();
-            Double[] prijsSaus = SausMenu.getSausPrijzen();
-
-            System.out.println("Kies de saus: ");
-            for (int i = 0; i < beschikbareSaus.length; i++) {
-                System.out.print(beschikbareSaus[i] + ": $" + prijsSaus[i] + ", ");
-            }
-            System.out.println();
-            naamGekozenSaus = scanner.nextLine();
-
-            for (int i = 0; i < beschikbareSaus.length; i++) {
-                if (naamGekozenSaus.equals(beschikbareSaus[i])) {
-                    gekozenSaus.setNaamSaus(beschikbareSaus[i]);
-                    gekozenSaus.setPrijsSaus(prijsSaus[i]);
-                    return gekozenSaus;
-                }
-            }
-            System.out.println("Deze saus bestaat niet!");
-            return getSaus();
-        }
+        System.out.println("Deze saus bestaat niet!");
+        return getSaus();
+    }
 
 //        public void addDonerSaus (DonerProduct donerProduct) {
 //                donerProduct.prijs += donerProduct.saus.getPrijsSaus();
 //                donerProduct.naam += " | Saus: " + donerProduct.saus.getNaamSaus();
 //            }
-        }
+}
 
 

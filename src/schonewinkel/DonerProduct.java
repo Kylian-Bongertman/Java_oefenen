@@ -4,9 +4,9 @@ public class DonerProduct extends Product {
     protected boolean isExtraGroot;
     protected Saus saus;
 
-    DonerProduct() {
-        isExtraGroot = KassaMedewerker.getDonerGrootte();
-        saus = KassaMedewerker.getSaus();
+    protected DonerProduct(boolean isExtraGroot, Saus saus) {
+        this.isExtraGroot = isExtraGroot;
+        this.saus = saus;
     }
 
     protected void addSaus() {
@@ -14,13 +14,17 @@ public class DonerProduct extends Product {
         naam += " | Saus: " + saus.getNaamSaus();
     }
 
-    public double getPrijs(){
+    public double getPrijs() {
         return saus.getPrijsSaus();
     }
 
-    public double getSausPrijs(){return saus.getPrijsSaus();}
+    public double getSausPrijs() {
+        return saus.getPrijsSaus();
+    }
 
-    public String getSausNaam(){return saus.getNaamSaus();}
+    public String getSausNaam() {
+        return saus.getNaamSaus();
+    }
 }
 
 

@@ -17,9 +17,9 @@ public class Winkel {
 
         while (isNieuweBestelling) {
             toonMenu();
-            Product nieuwItem = KassaMedewerker.neemBestellingAan();
+            Product nieuwItem = Tycho.neemBestellingAan();
             bestelling.add(nieuwItem);
-            Double nieuwItemPrijs = nieuwItem.getPrijs();
+            double nieuwItemPrijs = nieuwItem.getPrijs();
             System.out.println("De prijs van dit item is: " + nieuwItemPrijs);
 
             System.out.println("Wilt u nog wat bestellen? (y/n)");
@@ -39,8 +39,7 @@ public class Winkel {
                 DonerProduct donerProduct = (DonerProduct) item;
                 String sausToevoeging = "| Saus:" + donerProduct.getSausNaam();
                 System.out.println("Naam: " + item.getNaam() + " " + sausToevoeging + " | prijs: " + item.getPrijs());
-            }
-            else{
+            } else {
                 System.out.println("Naam: " + item.getNaam() + " | prijs: " + item.getPrijs());
             }
         }
