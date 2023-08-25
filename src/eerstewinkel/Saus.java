@@ -1,3 +1,5 @@
+package eerstewinkel;
+
 public enum Saus {
     KNOFLOOKSAUS("Knoflooksaus", 0.50),
     SAMBAL("Sambal", 0.30),

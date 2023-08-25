@@ -1,3 +1,5 @@
+package eerstewinkel;
+
 public enum ProductGrootte {
     BROODJE_DONER_NORMAAL("Broodje doner Normaal", 5.0),
     BROODJE_DONER_MEGA("Broodje doner Mega", 8.0),

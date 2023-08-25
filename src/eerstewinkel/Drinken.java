@@ -1,3 +1,5 @@
+package eerstewinkel;
+
 public class Drinken extends Product {
     Drinken(String productKeuze) {
         kiesGrootte(productKeuze); // Normaal of Mega grootte

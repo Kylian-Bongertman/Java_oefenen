@@ -1,3 +1,5 @@
+package eerstewinkel;
+
 public enum Salade {
     SLA("Sla", 0.0),
     TOMAAT("Tomaat", 0.0),
