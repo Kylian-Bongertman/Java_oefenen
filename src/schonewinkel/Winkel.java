@@ -37,7 +37,7 @@ public class Winkel {
             totaalPrijsBestelling += item.getPrijs();
             if (item instanceof DonerProduct) {
                 DonerProduct donerProduct = (DonerProduct) item;
-                String sausToevoeging = "| Saus:" + donerProduct.getSausNaam();
+                String sausToevoeging = "| Saus: " + donerProduct.getSausNaam();
                 System.out.println("Naam: " + item.getNaam() + " " + sausToevoeging + " | prijs: " + item.getPrijs());
             } else {
                 System.out.println("Naam: " + item.getNaam() + " | prijs: " + item.getPrijs());

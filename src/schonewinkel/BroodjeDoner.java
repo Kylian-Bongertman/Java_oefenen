@@ -10,7 +10,6 @@ public class BroodjeDoner extends DonerProduct {
             naam = "Broodje doner";
             prijs = 5.0;
         }
-        addSaus();
     }
 
     @Override

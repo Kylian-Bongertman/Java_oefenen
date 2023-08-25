@@ -9,11 +9,6 @@ public class DonerProduct extends Product {
         this.saus = saus;
     }
 
-    protected void addSaus() {
-        prijs += saus.getPrijsSaus();
-        naam += " | Saus: " + saus.getNaamSaus();
-    }
-
     public double getPrijs() {
         return saus.getPrijsSaus();
     }
