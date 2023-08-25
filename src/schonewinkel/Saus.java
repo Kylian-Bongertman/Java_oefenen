@@ -4,11 +4,8 @@ public class Saus {
     private String naamSaus = "";
     private Double prijsSaus = 0.0;
 
-    public void setNaamSaus(String naamSaus) {
+    public Saus(String naamSaus, Double prijsSaus) {
         this.naamSaus = naamSaus;
-    }
-
-    public void setPrijsSaus(Double prijsSaus) {
         this.prijsSaus = prijsSaus;
     }
 

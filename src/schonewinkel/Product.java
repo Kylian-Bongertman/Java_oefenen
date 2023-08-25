@@ -4,21 +4,18 @@ public class Product {
     protected String naam = "Product";
     protected double prijs = 0.0;
 
-    public String getNaam() {
-        return naam;
+    public Product(String naam, double prijs) {
+        this.naam = naam;
+        this.prijs = prijs;
+    }
+    public Product() {
     }
 
-    public void setNaam(String naam) {
-        this.naam = naam;
+    public String getNaam() {
+        return naam;
     }
 
     public double getPrijs() {
         return this.prijs;
     }
-
-    public void setPrijs(double prijs) {
-        this.prijs = prijs;
-    }
-
-
 }
