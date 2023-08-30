@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Winkel {
 
     public static void main(String[] args) {
-        List<Product> bestelling = new ArrayList<>();
+        ArrayList<Product> bestelling = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         boolean isNieuweBestelling = true;
         KassaMedewerker Tycho = new KassaMedewerker();

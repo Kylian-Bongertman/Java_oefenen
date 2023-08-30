@@ -10,7 +10,7 @@ public abstract class DonerProduct extends Product {
     }
 
     public double getPrijs() {
-        return saus.getPrijsSaus();
+        return prijs + getSausPrijs();
     }
 
     public double getSausPrijs() {

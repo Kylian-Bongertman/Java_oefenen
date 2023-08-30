@@ -11,10 +11,5 @@ public class BroodjeDoner extends DonerProduct {
             prijs = 5.0;
         }
     }
-
-    @Override
-    public double getPrijs() {
-        return prijs + getSausPrijs();
-    }
 }
 
