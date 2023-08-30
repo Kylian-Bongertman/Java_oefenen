@@ -11,5 +11,4 @@ public class FrisdrankMenu {
     public static Double[] getFrisdrankPrijzen() {
         return frisdrankPrijzen;
     }
-
 }

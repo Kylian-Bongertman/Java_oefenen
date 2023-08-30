@@ -1,6 +1,6 @@
 package schonewinkel;
 
-public class DonerProduct extends Product {
+public abstract class DonerProduct extends Product {
     protected boolean isExtraGroot;
     protected Saus saus;
 
