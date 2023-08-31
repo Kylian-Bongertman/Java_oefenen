@@ -1,24 +1,52 @@
 package schonewinkel.Bezorgingen;
 
+import schonewinkel.Product;
+
+import java.util.ArrayList;
+
 public class BezorgDienst {
     private double bezorgTijd;
     private double bezorgPrijs;
 
 
-    public static double berekenBezorgTijd() {
-        double bezorgTijd =0.0;
-        //Math.random
+    public static double berekenBezorgTijd() { //BezorgTijd in minuten.
+        double bezorgTijd;
+        bezorgTijd = Math.random()*100;
         return bezorgTijd;
     }
 
-    public static double berekenBezorgPrijs() {
+    public static double berekenBezorgPrijs(ArrayList<Product> bestelling) {
         double bezorgPrijs = 0.0;
+        Bezorging bezorging = selecteerJuisteDoos(bestelling);
+
+        bezorgPrijs += bezorging.getPrijs();
         return  bezorgPrijs;
     }
 
-    public Bezorging maakBezorgingAan() {
-        Bezorging bezorging = null;
-        return bezorging;
+    public static double berekenBenodigdeCapaciteit(ArrayList<Product> bestelling) {
+        double benodigdeCapaciteit = -1.0; // -1 Omdat "Bezorging" ook in bestelling zit en deze moet niet meegerekend worden.
+        for (Product Item : bestelling) {
+            benodigdeCapaciteit += Item.getVolume();
+        }
+        return benodigdeCapaciteit;
+    }
+
+    public static Bezorging selecteerJuisteDoos(ArrayList<Product> bestelling) {
+        double benodigdeCapacteit = berekenBenodigdeCapaciteit(bestelling);
+        for (BezorgOpties optie : BezorgOpties.values()) {
+            if (optie.getCapaciteit() >= benodigdeCapacteit) {
+                Bezorging bezorging = new Bezorging(berekenBezorgTijd(), optie.getPrijs());
+                return bezorging;
+            }
+        }
+        return null; //crasht als benodigde capaciteit meer is dan 10.
+    }
+
+    public void maakBezorgingAan(ArrayList<Product> bestelling) {
+        Bezorging bezorging = selecteerJuisteDoos(bestelling);
+        System.out.print("Doos: " + bezorging.getNaam());
+
+
     }
 }
 

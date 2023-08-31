@@ -15,5 +15,17 @@ public enum BezorgOpties {
         this.prijs = prijs;
         this.capaciteit = capaciteit;
     }
+
+    public String getNaam() {
+        return naam;
+    }
+
+    public double getPrijs() {
+        return prijs;
+    }
+
+    public double getCapaciteit() {
+        return capaciteit;
+    }
 }
 

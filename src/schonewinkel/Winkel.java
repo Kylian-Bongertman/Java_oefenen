@@ -19,21 +19,20 @@ public class Winkel {
     }
 
     private static void kiesVerzendMethode() {
+        System.out.println("Wil je je bestelling thuis bezorgd hebben? (y/n)");
         String bestellingBezorgenKeuze = scanner.nextLine();
 
         boolean isAkkoordMetBezorging;
         if (bestellingBezorgenKeuze.equals("y")) {
             double bezorgTijd = BezorgDienst.berekenBezorgTijd();
-            double bezorgPrijs = BezorgDienst.berekenBezorgPrijs();
+            double bezorgPrijs = BezorgDienst.berekenBezorgPrijs(bestelling);
             System.out.println("De bezorgTijd is: " + bezorgTijd + " De bezorgPrijs is: " + bezorgPrijs);
             System.out.println("Is dit akkoord? (y/n)");
             String bezorgingAkkoordKeuze = scanner.nextLine();
             isAkkoordMetBezorging = bezorgingAkkoordKeuze.equals("y");
 
             if (isAkkoordMetBezorging) {
-                double tijd =0.0;
-                double prijs =0.0;
-                Bezorging bezorgingVanBestelling = new Bezorging(tijd, prijs);
+                Bezorging bezorgingVanBestelling = new Bezorging(bezorgTijd, bezorgPrijs);
                 bestelling.add(bezorgingVanBestelling);
             }
         }
