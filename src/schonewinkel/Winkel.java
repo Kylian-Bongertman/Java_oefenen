@@ -30,7 +30,7 @@ public class Winkel {
         if (bestellingBezorgenKeuze.equals("y")) {
             double bezorgTijd = BezorgDienst.berekenBezorgTijd();
             double bezorgPrijs = BezorgDienst.berekenBezorgPrijs(bestelling);
-            System.out.println("De bezorgTijd is: " + bezorgTijd + " De bezorgPrijs is: " + bezorgPrijs);
+            System.out.println("De bezorgTijd is: " + bezorgTijd + " minuten. " + " De bezorgPrijs is: " + bezorgPrijs); //De verzendMethode is: .. Brief/ doos
             System.out.println("Is dit akkoord? (y/n)");
             String bezorgingAkkoordKeuze = scanner.nextLine();
             isAkkoordMetBezorging = bezorgingAkkoordKeuze.equals("y");
@@ -65,7 +65,6 @@ public class Winkel {
         Double totaalPrijsBestelling = 0.0;
         boolean heeftBezorging = false;
 
-
         System.out.println("--------------------Bestelling--------------------");
         for (Product item : bestelling) {
             totaalPrijsBestelling += item.getPrijs();
@@ -85,9 +84,8 @@ public class Winkel {
         if (heeftBezorging) {
             System.out.println("De bezorging zal plaatsvinden over... ");
         }
-        System.out.println("Bedankt voor je bestelling, dat wordt dan: " + totaalPrijsBestelling + " Euro"); //Som van bestelling
+        System.out.println("Bedankt voor je bestelling, dat wordt dan: " + formatter.format(totaalPrijsBestelling)); //Som van bestelling
     }
-
 
     public static void toonMenu() {
         System.out.println("----------------- Menu -----------------");
