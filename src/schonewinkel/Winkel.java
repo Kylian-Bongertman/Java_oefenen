@@ -3,14 +3,18 @@ package schonewinkel;
 import schonewinkel.Bezorgingen.BezorgDienst;
 import schonewinkel.Bezorgingen.Bezorging;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Winkel {
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Product> bestelling = new ArrayList<>();
     static KassaMedewerker Tycho = new KassaMedewerker();
+    static Locale locale = new Locale("en", "NL"); //Om Euro te selecteren als geldeenheid.
+    static NumberFormat formatter = NumberFormat.getCurrencyInstance(locale); // Om prijs in Euro weer te geven.
 
     public static void main(String[] args) {
         neemBestellingAan();
@@ -49,7 +53,7 @@ public class Winkel {
             Product nieuwItem = Tycho.voegProductToeAanBestelling();
             bestelling.add(nieuwItem);
             double nieuwItemPrijs = nieuwItem.getPrijs();
-            System.out.println("De prijs van dit item is: " + nieuwItemPrijs);
+            System.out.println("De prijs van dit item is: " + formatter.format(nieuwItemPrijs));
 
             System.out.println("Wilt u nog wat bestellen? (y/n)");
             String nieuwItemInBestellingKeuze = scanner.nextLine();
@@ -59,6 +63,8 @@ public class Winkel {
 
     private static void printKassaBon(List<Product> bestelling) {
         Double totaalPrijsBestelling = 0.0;
+        boolean heeftBezorging = false;
+
 
         System.out.println("--------------------Bestelling--------------------");
         for (Product item : bestelling) {
@@ -68,12 +74,20 @@ public class Winkel {
                 String sausToevoeging = "| Saus: " + donerProduct.getSausNaam();
                 System.out.println("Naam: " + item.getNaam() + " " + sausToevoeging + " | prijs: " + item.getPrijs());
             } else {
-                System.out.println("Naam: " + item.getNaam() + " | prijs: " + item.getPrijs());
+                System.out.println("Naam: " + item.getNaam() + " | prijs: " + formatter.format(item.getPrijs())); //formatter om tweede decimaal weer te geven voor prijs.
+            }
+
+            if (item instanceof Bezorging) {
+                heeftBezorging = true;
             }
         }
         System.out.println("--------------------------------------------------");
+        if (heeftBezorging) {
+            System.out.println("De bezorging zal plaatsvinden over... ");
+        }
         System.out.println("Bedankt voor je bestelling, dat wordt dan: " + totaalPrijsBestelling + " Euro"); //Som van bestelling
     }
+
 
     public static void toonMenu() {
         System.out.println("----------------- Menu -----------------");

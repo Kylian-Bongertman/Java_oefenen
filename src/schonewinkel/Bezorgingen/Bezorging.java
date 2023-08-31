@@ -9,6 +9,7 @@ public class Bezorging extends Product {
         this.bezorgTijd = bezorgTijd;
         prijs = bezorgPrijs;
         naam = "Bezorging";
+        volume = 0;
     }
 
     public double getBezorgTijd() {

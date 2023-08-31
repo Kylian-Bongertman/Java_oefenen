@@ -12,6 +12,7 @@ public class BezorgDienst {
     public static double berekenBezorgTijd() { //BezorgTijd in minuten.
         double bezorgTijd;
         bezorgTijd = Math.random()*100;
+        bezorgTijd = Math.round(bezorgTijd);
         return bezorgTijd;
     }
 
@@ -24,7 +25,7 @@ public class BezorgDienst {
     }
 
     public static double berekenBenodigdeCapaciteit(ArrayList<Product> bestelling) {
-        double benodigdeCapaciteit = -1.0; // -1 Omdat "Bezorging" ook in bestelling zit en deze moet niet meegerekend worden.
+        double benodigdeCapaciteit = 0.0;
         for (Product Item : bestelling) {
             benodigdeCapaciteit += Item.getVolume();
         }
