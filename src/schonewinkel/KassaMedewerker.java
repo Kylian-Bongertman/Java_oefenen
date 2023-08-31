@@ -3,7 +3,7 @@ package schonewinkel;
 import java.util.Scanner;
 
 public class KassaMedewerker {
-    public Product neemBestellingAan() {
+    public Product voegProductToeAanBestelling() {
         Scanner scanner = new Scanner(System.in);
         String besteldProduct = scanner.nextLine();
         String[] frisdrankNamen = FrisdrankMenu.getFrisdrankNamen();
@@ -31,7 +31,7 @@ public class KassaMedewerker {
                 return durum;
             default:
                 System.out.println("Dit staat niet op het menu!");
-                return neemBestellingAan();
+                return voegProductToeAanBestelling();
         }
     }
 

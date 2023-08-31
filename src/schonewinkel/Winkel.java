@@ -1,32 +1,61 @@
 package schonewinkel;
 
+import schonewinkel.Bezorgingen.BezorgDienst;
+import schonewinkel.Bezorgingen.Bezorging;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Winkel {
+    static Scanner scanner = new Scanner(System.in);
+    static ArrayList<Product> bestelling = new ArrayList<>();
+    static KassaMedewerker Tycho = new KassaMedewerker();
 
     public static void main(String[] args) {
-        ArrayList<Product> bestelling = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
+        neemBestellingAan();
+        kiesVerzendMethode();
+        printKassaBon(bestelling);
+    }
+
+    private static void kiesVerzendMethode() {
+        String bestellingBezorgenKeuze = scanner.nextLine();
+
+        boolean isAkkoordMetBezorging;
+        if (bestellingBezorgenKeuze.equals("y")) {
+            double bezorgTijd = BezorgDienst.berekenBezorgTijd();
+            double bezorgPrijs = BezorgDienst.berekenBezorgPrijs();
+            System.out.println("De bezorgTijd is: " + bezorgTijd + " De bezorgPrijs is: " + bezorgPrijs);
+            System.out.println("Is dit akkoord? (y/n)");
+            String bezorgingAkkoordKeuze = scanner.nextLine();
+            isAkkoordMetBezorging = bezorgingAkkoordKeuze.equals("y");
+
+            if (isAkkoordMetBezorging) {
+                double tijd =0.0;
+                double prijs =0.0;
+                Bezorging bezorgingVanBestelling = new Bezorging(tijd, prijs);
+                bestelling.add(bezorgingVanBestelling);
+            }
+        }
+    }
+
+    private static void neemBestellingAan() {
         boolean isNieuweBestelling = true;
-        KassaMedewerker Tycho = new KassaMedewerker();
 
         System.out.println("Welkom bij DonerIX!");
         System.out.println("Mag ik uw bestelling?");
 
         while (isNieuweBestelling) {
             toonMenu();
-            Product nieuwItem = Tycho.neemBestellingAan();
+            Product nieuwItem = Tycho.voegProductToeAanBestelling();
             bestelling.add(nieuwItem);
             double nieuwItemPrijs = nieuwItem.getPrijs();
             System.out.println("De prijs van dit item is: " + nieuwItemPrijs);
 
             System.out.println("Wilt u nog wat bestellen? (y/n)");
-            String nieuweBestellingKeuze = scanner.nextLine();
-            isNieuweBestelling = nieuweBestellingKeuze.equals("y"); // Als gebruiker "y" antwoord → plaats nieuwe bestelling
+            String nieuwItemInBestellingKeuze = scanner.nextLine();
+            isNieuweBestelling = nieuwItemInBestellingKeuze.equals("y"); // Als gebruiker "y" antwoord → plaats nieuw product in bestelling
         }
-        printKassaBon(bestelling);
     }
 
     private static void printKassaBon(List<Product> bestelling) {
@@ -54,3 +83,4 @@ public class Winkel {
         System.out.println("----------------------------------------");
     }
 }
+
