@@ -5,9 +5,6 @@ import schonewinkel.Product;
 import java.util.ArrayList;
 
 public class BezorgDienst {
-    private double bezorgTijd;
-    private double bezorgPrijs;
-
 
     public static double berekenBezorgTijd() { //BezorgTijd in minuten.
         double bezorgTijd;
@@ -42,12 +39,6 @@ public class BezorgDienst {
         }
         return null; //crasht als benodigde capaciteit meer is dan 10.
     }
-
-//    public void maakBezorgingAan(ArrayList<Product> bestelling) {
-//        Bezorging bezorging = selecteerJuisteDoos(bestelling);
-//        System.out.print("Doos: " + bezorging.getNaam());
-//    }
-
 }
 
 

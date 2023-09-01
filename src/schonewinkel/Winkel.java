@@ -11,15 +11,14 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class Winkel {
-    static Scanner scanner = new Scanner(System.in);
-    static ArrayList<Product> bestelling = new ArrayList<>();
-    static KassaMedewerker Tycho = new KassaMedewerker();
-    static Bezorger Pietje = new Bezorger();
-    static Locale locale = new Locale("en", "NL"); //Om Euro te selecteren als geldeenheid.
-    static NumberFormat formatter = NumberFormat.getCurrencyInstance(locale); // Om prijs in Euro weer te geven.
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final ArrayList<Product> bestelling = new ArrayList<>();
+    private static final KassaMedewerker kassaMedewerker = new KassaMedewerker();
+    private static final Bezorger bezorger = new Bezorger();
+    private static final Locale locale = new Locale("en", "NL");
+    private static final NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
 
     public static void main(String[] args) throws Exception {
-        //Bezorger.startBezorgAnimatie();
         neemBestellingAan();
         kiesVerzendMethode();
         printKassaBon(bestelling);
@@ -53,10 +52,10 @@ public class Winkel {
 
         while (isNieuweBestelling) {
             toonMenu();
-            Product nieuwItem = Tycho.voegProductToeAanBestelling();
+            Product nieuwItem = kassaMedewerker.voegProductToeAanBestelling();
             bestelling.add(nieuwItem);
             double nieuwItemPrijs = nieuwItem.getPrijs();
-            System.out.println("De prijs van dit item is: " + formatter.format(nieuwItemPrijs));
+            System.out.println("De prijs van dit item is: " + currencyFormatter.format(nieuwItemPrijs));
 
             System.out.println("Wilt u nog wat bestellen? (y/n)");
             String nieuwItemInBestellingKeuze = scanner.nextLine();
@@ -64,45 +63,59 @@ public class Winkel {
         }
     }
 
+
     private static void printKassaBon(List<Product> bestelling) throws Exception {
-        Double totaalPrijsBestelling = 0.0;
-        boolean heeftBezorging = false;
-        Bezorging bezorging = null;
+        double totaalPrijsBestelling = berekenTotaalPrijs(bestelling);
+        Bezorging bezorging = vindBezorging(bestelling);
 
         System.out.println("--------------------Bestelling--------------------");
         for (Product item : bestelling) {
-            totaalPrijsBestelling += item.getPrijs();
-            if (item instanceof DonerProduct) {
-                DonerProduct donerProduct = (DonerProduct) item;
-                String sausToevoeging = "| Saus: " + donerProduct.getSausNaam();
-                System.out.println("Naam: " + item.getNaam() + " " + sausToevoeging + " | prijs: " + item.getPrijs());
-            } else {
-                System.out.println("Naam: " + item.getNaam() + " | prijs: " + formatter.format(item.getPrijs())); //formatter om tweede decimaal weer te geven voor prijs.
-            }
-
-            if (item instanceof Bezorging) {
-                heeftBezorging = true;
-                bezorging = (Bezorging) item; // Als bezorging gevonden wordt, wijs dit dan toe aan bezorging variabele
-            }
+            printProduct(item);
         }
         System.out.println("--------------------------------------------------");
-        if (heeftBezorging) {
+
+        if (bezorging != null) {
             System.out.println("De bezorging zal plaatsvinden over: " + bezorging.getBezorgTijd() + " minuten");
-            double minutenOnderweg = bezorging.getBezorgTijd();
-            stuurBezorger(minutenOnderweg);
+            stuurBezorger(bezorging.getBezorgTijd());
         }
-        System.out.println("Bedankt voor je bestelling, dat wordt dan: " + formatter.format(totaalPrijsBestelling)); //Som van bestelling
+        System.out.println("Bedankt voor je bestelling, dat wordt dan: " + currencyFormatter.format(totaalPrijsBestelling));
+    }
+
+    private static double berekenTotaalPrijs(List<Product> bestelling) {
+        double totaalPrijsBestelling = 0.0;
+        for (Product item : bestelling) {
+            totaalPrijsBestelling += item.getPrijs();
+        }
+        return totaalPrijsBestelling;
+    }
+
+    private static Bezorging vindBezorging(List<Product> bestelling) {
+        for (Product item : bestelling) {
+            if (item instanceof Bezorging) {
+                return (Bezorging) item;
+            }
+        }
+        return null;
     }
 
     private static void stuurBezorger(double minutenOnderweg) throws Exception {
-        Pietje.startBezorgAnimatie(minutenOnderweg);
+        bezorger.startBezorgAnimatie(minutenOnderweg);
     }
 
-    public static void toonMenu() {
+    private static void toonMenu() {
         System.out.println("----------------- Menu -----------------");
         System.out.println("Broodje doner | Durum doner             ");
         System.out.println("Cola          | Fanta       | Ranja     ");
         System.out.println("----------------------------------------");
     }
-}
 
+    private static void printProduct(Product item) {
+        if (item instanceof DonerProduct) {
+            DonerProduct donerProduct = (DonerProduct) item;
+            String sausToevoeging = "| Saus: " + donerProduct.getSausNaam();
+            System.out.println("Naam: " + item.getNaam() + " " + sausToevoeging + " | prijs: " + currencyFormatter.format(item.getPrijs()));
+        } else {
+            System.out.println("Naam: " + item.getNaam() + " | prijs: " + currencyFormatter.format(item.getPrijs()));
+        }
+    }
+}
