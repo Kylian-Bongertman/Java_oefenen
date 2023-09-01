@@ -13,7 +13,6 @@ public class Bezorger {
                 e.printStackTrace();
             }
         }
-
         System.out.println("Hoi, hier is uw bestelling!");
     }
 }
