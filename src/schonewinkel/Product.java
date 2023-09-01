@@ -2,6 +2,8 @@ package schonewinkel;
 
 public class Product {
     protected String naam = "Product";
+
+
     protected double prijs = 0.0;
     protected double volume = 1.0;
 
@@ -22,5 +24,9 @@ public class Product {
 
     public double getVolume() {
         return volume;
+    }
+
+    public void setPrijs(double prijs) {
+        this.prijs = prijs;
     }
 }

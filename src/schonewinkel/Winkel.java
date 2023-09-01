@@ -20,8 +20,35 @@ public class Winkel {
 
     public static void main(String[] args) throws Exception {
         neemBestellingAan();
+        checkKortingsCode();
         kiesVerzendMethode();
         printKassaBon(bestelling);
+        stuurBezorger();
+    }
+
+    private static void stuurBezorger() throws Exception {
+        Bezorging bezorging = vindBezorging(bestelling);
+
+        if (bezorging != null) {
+            System.out.println("De bezorging zal plaatsvinden over: " + bezorging.getBezorgTijd() + " minuten");
+            startBezorgAnimatie(bezorging.getBezorgTijd());
+        }
+    }
+
+    private static void checkKortingsCode() {
+        System.out.println("Heeft u een korting code?");
+        String inBezitVanKortingsCode = scanner.nextLine();
+        if (inBezitVanKortingsCode.equals("y")) {
+            geefKorting();
+            System.out.println("De korting is toegepast.");
+        }
+    }
+
+    private static void geefKorting() {
+        for (Product item : bestelling) {
+            double nieuwPrijs = item.getPrijs() * 0.8;
+            item.setPrijs(nieuwPrijs);
+        }
     }
 
     private static void kiesVerzendMethode() {
@@ -63,21 +90,14 @@ public class Winkel {
         }
     }
 
-
-    private static void printKassaBon(List<Product> bestelling) throws Exception {
+    private static void printKassaBon(List<Product> bestelling) {
         double totaalPrijsBestelling = berekenTotaalPrijs(bestelling);
-        Bezorging bezorging = vindBezorging(bestelling);
 
         System.out.println("--------------------Bestelling--------------------");
         for (Product item : bestelling) {
             printProduct(item);
         }
         System.out.println("--------------------------------------------------");
-
-        if (bezorging != null) {
-            System.out.println("De bezorging zal plaatsvinden over: " + bezorging.getBezorgTijd() + " minuten");
-            stuurBezorger(bezorging.getBezorgTijd());
-        }
         System.out.println("Bedankt voor je bestelling, dat wordt dan: " + currencyFormatter.format(totaalPrijsBestelling));
     }
 
@@ -98,7 +118,7 @@ public class Winkel {
         return null;
     }
 
-    private static void stuurBezorger(double minutenOnderweg) throws Exception {
+    private static void startBezorgAnimatie(double minutenOnderweg) throws Exception {
         bezorger.startBezorgAnimatie(minutenOnderweg);
     }
 
