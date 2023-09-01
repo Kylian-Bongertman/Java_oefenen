@@ -14,6 +14,7 @@ public class Winkel {
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Product> bestelling = new ArrayList<>();
     static KassaMedewerker Tycho = new KassaMedewerker();
+    static Bezorger Pietje = new Bezorger();
     static Locale locale = new Locale("en", "NL"); //Om Euro te selecteren als geldeenheid.
     static NumberFormat formatter = NumberFormat.getCurrencyInstance(locale); // Om prijs in Euro weer te geven.
 
@@ -94,7 +95,7 @@ public class Winkel {
     }
 
     private static void stuurBezorger(double minutenOnderweg) throws Exception {
-        Bezorger.startBezorgAnimatie(minutenOnderweg);
+        Pietje.startBezorgAnimatie(minutenOnderweg);
     }
 
     public static void toonMenu() {

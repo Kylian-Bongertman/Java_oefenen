@@ -11,7 +11,7 @@ public class BezorgDienst {
 
     public static double berekenBezorgTijd() { //BezorgTijd in minuten.
         double bezorgTijd;
-        bezorgTijd = Math.random()*100;
+        bezorgTijd = Math.random() * 100;
         bezorgTijd = Math.round(bezorgTijd);
         return bezorgTijd;
     }
@@ -21,7 +21,7 @@ public class BezorgDienst {
         Bezorging bezorging = selecteerJuisteDoos(bestelling);
 
         bezorgPrijs += bezorging.getPrijs();
-        return  bezorgPrijs;
+        return bezorgPrijs;
     }
 
     public static double berekenBenodigdeCapaciteit(ArrayList<Product> bestelling) {
