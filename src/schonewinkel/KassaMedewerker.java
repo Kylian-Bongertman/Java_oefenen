@@ -3,7 +3,7 @@ package schonewinkel;
 import java.util.Scanner;
 
 public class KassaMedewerker {
-    public Product neemBestellingAan() {
+    public Product voegProductToeAanBestelling() {
         Scanner scanner = new Scanner(System.in);
         String besteldProduct = scanner.nextLine();
         String[] frisdrankNamen = FrisdrankMenu.getFrisdrankNamen();
@@ -20,22 +20,22 @@ public class KassaMedewerker {
 
         switch (besteldProduct) {
             case "Broodje doner" :
-                gekozenGrootte = getDonerGrootte();
-                gekozenSaus = getSaus();
+                gekozenGrootte = vraagDonerGrootteKeuze();
+                gekozenSaus = vraagSausKeuze();
                 BroodjeDoner broodje = new BroodjeDoner(gekozenGrootte, gekozenSaus);
                 return broodje;
             case "Durum doner" :
-                gekozenGrootte = getDonerGrootte();
-                gekozenSaus = getSaus();
+                gekozenGrootte = vraagDonerGrootteKeuze();
+                gekozenSaus = vraagSausKeuze();
                 DurumDoner durum = new DurumDoner(gekozenGrootte, gekozenSaus);
                 return durum;
             default:
                 System.out.println("Dit staat niet op het menu!");
-                return neemBestellingAan();
+                return voegProductToeAanBestelling();
         }
     }
 
-    public boolean getDonerGrootte() {
+    public boolean vraagDonerGrootteKeuze() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Kies de grootte: (Normaal/Mega)");
         String gekozenGrootte = scanner.nextLine();
@@ -45,11 +45,11 @@ public class KassaMedewerker {
             return false;
         } else {
             System.out.println("Deze grootte bestaat niet!");
-            return getDonerGrootte();
+            return vraagDonerGrootteKeuze();
         }
     }
 
-    public Saus getSaus() {
+    public Saus vraagSausKeuze() {
         Scanner scanner = new Scanner(System.in);
         String naamGekozenSaus = "";
         Saus gekozenSaus = null;
@@ -67,7 +67,7 @@ public class KassaMedewerker {
             }
         }
         System.out.println("Deze saus bestaat niet!");
-        return getSaus(); //Roep de methode opnieuw aan als de saus niet geldig is.
+        return vraagSausKeuze(); //Roep de methode opnieuw aan als de saus niet geldig is.
     }
 }
 

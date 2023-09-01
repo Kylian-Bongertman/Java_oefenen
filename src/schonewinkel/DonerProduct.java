@@ -1,6 +1,6 @@
 package schonewinkel;
 
-public class DonerProduct extends Product {
+public abstract class DonerProduct extends Product {
     protected boolean isExtraGroot;
     protected Saus saus;
 
@@ -10,7 +10,7 @@ public class DonerProduct extends Product {
     }
 
     public double getPrijs() {
-        return saus.getPrijsSaus();
+        return prijs + getSausPrijs();
     }
 
     public double getSausPrijs() {
