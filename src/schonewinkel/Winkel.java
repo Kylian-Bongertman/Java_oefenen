@@ -17,8 +17,8 @@ public class Winkel {
     static Locale locale = new Locale("en", "NL"); //Om Euro te selecteren als geldeenheid.
     static NumberFormat formatter = NumberFormat.getCurrencyInstance(locale); // Om prijs in Euro weer te geven.
 
-    public static void main(String[] args) throws InterruptedException {
-        Bezorger.startBezorgAnimatie();
+    public static void main(String[] args) throws Exception {
+        //Bezorger.startBezorgAnimatie();
         neemBestellingAan();
         kiesVerzendMethode();
         printKassaBon(bestelling);
@@ -63,7 +63,7 @@ public class Winkel {
         }
     }
 
-    private static void printKassaBon(List<Product> bestelling) {
+    private static void printKassaBon(List<Product> bestelling) throws Exception {
         Double totaalPrijsBestelling = 0.0;
         boolean heeftBezorging = false;
         Bezorging bezorging = null;
@@ -87,9 +87,14 @@ public class Winkel {
         System.out.println("--------------------------------------------------");
         if (heeftBezorging) {
             System.out.println("De bezorging zal plaatsvinden over: " + bezorging.getBezorgTijd() + " minuten");
-
+            double minutenOnderweg = bezorging.getBezorgTijd();
+            stuurBezorger(minutenOnderweg);
         }
         System.out.println("Bedankt voor je bestelling, dat wordt dan: " + formatter.format(totaalPrijsBestelling)); //Som van bestelling
+    }
+
+    private static void stuurBezorger(double minutenOnderweg) throws Exception {
+        Bezorger.startBezorgAnimatie(minutenOnderweg);
     }
 
     public static void toonMenu() {

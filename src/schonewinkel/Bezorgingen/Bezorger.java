@@ -1,25 +1,21 @@
 package schonewinkel.Bezorgingen;
 
-public class Bezorger {
+import java.io.FileWriter;
 
-    public static void startBezorgAnimatie() throws InterruptedException {
-        int huidigePositie = 0;
-        int totaleAfstand = 10;
-        StringBuilder animatieString = new StringBuilder();
-        while (huidigePositie < totaleAfstand) {
-            for (int i = 0; i < totaleAfstand; i++) {
-                if (i == huidigePositie) {
-                    // Tekening van het bezorgbusje
-                    System.out.println(animatieString + "  ___");
-                    System.out.println(animatieString + "    _-_-  _/\\______\\\\__");
-                    System.out.println(animatieString + " _-_-__  / ,-. -|-  ,-.`-.");
-                    System.out.println(animatieString + "    _-_- `( o )----( o )-'");
-                    System.out.println(animatieString + "           `-'      `-'");
+public class Bezorger {
+    public static void startBezorgAnimatie(double minutenOnderweg) throws Exception{
+            char[] animationChars = new char[]{'|', '/', '-', '\\'};
+
+            for (int i = 0; i <= minutenOnderweg; i++) {
+                System.out.print("Nog: " + (minutenOnderweg - i) + " minuten onderweg " + animationChars[i % 4] + "\r");
+
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
-            animatieString.append("-----");
-            Thread.sleep(1000); // Wacht 1 seconde voordat je de volgende toestand bijwerkt.
-            huidigePositie++; // Verplaats het bezorgbusje met één positie naar rechts.
+
+            System.out.println("Hoi, hier is uw bestelling!");
         }
     }
-}
