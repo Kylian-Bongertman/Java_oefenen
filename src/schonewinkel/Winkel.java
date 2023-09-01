@@ -1,6 +1,7 @@
 package schonewinkel;
 
 import schonewinkel.Bezorgingen.BezorgDienst;
+import schonewinkel.Bezorgingen.Bezorger;
 import schonewinkel.Bezorgingen.Bezorging;
 
 import java.text.NumberFormat;
@@ -16,7 +17,8 @@ public class Winkel {
     static Locale locale = new Locale("en", "NL"); //Om Euro te selecteren als geldeenheid.
     static NumberFormat formatter = NumberFormat.getCurrencyInstance(locale); // Om prijs in Euro weer te geven.
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        Bezorger.startBezorgAnimatie();
         neemBestellingAan();
         kiesVerzendMethode();
         printKassaBon(bestelling);
@@ -64,6 +66,7 @@ public class Winkel {
     private static void printKassaBon(List<Product> bestelling) {
         Double totaalPrijsBestelling = 0.0;
         boolean heeftBezorging = false;
+        Bezorging bezorging = null;
 
         System.out.println("--------------------Bestelling--------------------");
         for (Product item : bestelling) {
@@ -78,11 +81,13 @@ public class Winkel {
 
             if (item instanceof Bezorging) {
                 heeftBezorging = true;
+                bezorging = (Bezorging) item; // Als bezorging gevonden wordt, wijs dit dan toe aan bezorging variabele
             }
         }
         System.out.println("--------------------------------------------------");
         if (heeftBezorging) {
-            System.out.println("De bezorging zal plaatsvinden over... ");
+            System.out.println("De bezorging zal plaatsvinden over: " + bezorging.getBezorgTijd() + " minuten");
+
         }
         System.out.println("Bedankt voor je bestelling, dat wordt dan: " + formatter.format(totaalPrijsBestelling)); //Som van bestelling
     }

@@ -43,12 +43,11 @@ public class BezorgDienst {
         return null; //crasht als benodigde capaciteit meer is dan 10.
     }
 
-    public void maakBezorgingAan(ArrayList<Product> bestelling) {
-        Bezorging bezorging = selecteerJuisteDoos(bestelling);
-        System.out.print("Doos: " + bezorging.getNaam());
+//    public void maakBezorgingAan(ArrayList<Product> bestelling) {
+//        Bezorging bezorging = selecteerJuisteDoos(bestelling);
+//        System.out.print("Doos: " + bezorging.getNaam());
+//    }
 
-
-    }
 }
 
 
