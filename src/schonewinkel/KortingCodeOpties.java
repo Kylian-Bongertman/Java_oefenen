@@ -10,8 +10,8 @@ public enum KortingCodeOpties {
     ZEVENTIG_PROCENT("ZEVENTIG_PROCENT", 70),
     TACHTIG_PROCENT("TACHTIG_PROCENT", 80);
 
-    private int kortingPercentage = 0;
-    private String naam = "";
+    private final int kortingPercentage;
+    private final String naam;
 
     KortingCodeOpties(String naam, int kortingPercentage) {
         this.kortingPercentage = kortingPercentage;

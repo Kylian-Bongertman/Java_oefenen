@@ -6,9 +6,9 @@ public enum BezorgOpties {
     MIDDEL_DOOS("Middel doos", 5.0, 5.0),
     GROTE_DOOS("Grote doos", 7.0, 10.0);
 
-    private String naam;
-    private double prijs;
-    private double capaciteit;
+    private final String naam;
+    private final double prijs;
+    private final double capaciteit;
 
     BezorgOpties(String naam, double prijs, double capaciteit) {
         this.naam = naam;

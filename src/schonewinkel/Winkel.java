@@ -14,9 +14,9 @@ public class Winkel {
     private static final KassaMedewerker kassaMedewerker = new KassaMedewerker();
     private static final Bezorger bezorger = new Bezorger();
     private static final Locale locale = new Locale("en", "NL");
-    private static final NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+    public static final NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         neemBestellingAan();
         verwerkKortingCode();
         verwerkVerzendMethode();
@@ -24,7 +24,7 @@ public class Winkel {
         verstuurBezorging();
     }
 
-    private static void verstuurBezorging() throws Exception {
+    private static void verstuurBezorging() {
         Bezorging bezorging = vindBezorging(); //Haalt bezorging object uit de bestelling
 
         if (bezorging != null) {
@@ -102,7 +102,7 @@ public class Winkel {
         return null;
     }
 
-    private static void startBezorgAnimatie(double minutenOnderweg) throws Exception {
+    private static void startBezorgAnimatie(double minutenOnderweg) {
         bezorger.startBezorgAnimatie(minutenOnderweg);
     }
 

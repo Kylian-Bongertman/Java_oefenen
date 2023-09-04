@@ -16,25 +16,25 @@ public class KassaMedewerker {
 
         for (int i = 0; i < frisdrankNamen.length; i++) {
             if (besteldProduct.equals(frisdrankNamen[i])) {
-                Product frisdrank = new Product(frisdrankNamen[i], frisdrankPrijzen[i]);
-                return frisdrank;
+                return new Product(frisdrankNamen[i], frisdrankPrijzen[i]);
             }
         }
 
         switch (besteldProduct) {
-            case "Broodje doner" :
+            case "Broodje doner" -> {
                 gekozenGrootte = vraagDonerGrootteKeuze();
                 gekozenSaus = vraagSausKeuze();
-                BroodjeDoner broodje = new BroodjeDoner(gekozenGrootte, gekozenSaus);
-                return broodje;
-            case "Durum doner" :
+                return new BroodjeDoner(gekozenGrootte, gekozenSaus);
+            }
+            case "Durum doner" -> {
                 gekozenGrootte = vraagDonerGrootteKeuze();
                 gekozenSaus = vraagSausKeuze();
-                DurumDoner durum = new DurumDoner(gekozenGrootte, gekozenSaus);
-                return durum;
-            default:
+                return new DurumDoner(gekozenGrootte, gekozenSaus);
+            }
+            default -> {
                 System.out.println("Dit staat niet op het menu!");
                 return vraagTeBestellenProduct(scanner);
+            }
         }
     }
 
@@ -54,8 +54,8 @@ public class KassaMedewerker {
 
     public Saus vraagSausKeuze() {
         Scanner scanner = new Scanner(System.in);
-        String naamGekozenSaus = "";
-        Saus gekozenSaus = null;
+        String naamGekozenSaus;
+        Saus gekozenSaus;
         SausMenu[] beschikbareSaus = SausMenu.values();
 
         System.out.println("Kies de saus: ");

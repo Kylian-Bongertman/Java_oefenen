@@ -1,8 +1,8 @@
 package schonewinkel;
 
 public class Saus {
-    private String naamSaus = "";
-    private Double prijsSaus = 0.0;
+    private final String naamSaus;
+    private final Double prijsSaus;
 
     public Saus(String naamSaus, Double prijsSaus) {
         this.naamSaus = naamSaus;

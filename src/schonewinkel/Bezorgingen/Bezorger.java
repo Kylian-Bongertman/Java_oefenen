@@ -1,7 +1,7 @@
 package schonewinkel.Bezorgingen;
 
 public class Bezorger {
-    public void startBezorgAnimatie(double minutenOnderweg) throws Exception {
+    public void startBezorgAnimatie(double minutenOnderweg) {
         char[] animationChars = new char[]{'|', '/', '-', '\\'};
 
         for (int i = 0; i <= minutenOnderweg; i++) {
