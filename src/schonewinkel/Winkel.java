@@ -114,8 +114,7 @@ public class Winkel {
     }
 
     private static void printProduct(Product item) {
-        if (item instanceof DonerProduct) {
-            DonerProduct donerProduct = (DonerProduct) item;
+        if (item instanceof DonerProduct donerProduct) {
             String sausToevoeging = "| Saus: " + donerProduct.getSausNaam();
             System.out.println("Naam: " + item.getNaam() + " " + sausToevoeging + " | prijs: " + currencyFormatter.format(item.getPrijs()));
         } else {
