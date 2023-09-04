@@ -68,22 +68,9 @@ public class Winkel {
     }
 
     private static void kiesVerzendMethode() {
-        System.out.println("Wil je je bestelling thuis bezorgd hebben? (y/n)");
-        String bestellingBezorgenKeuze = scanner.nextLine();
-
-        boolean isAkkoordMetBezorging;
-        if (bestellingBezorgenKeuze.equals("y")) {
-            double bezorgTijd = BezorgDienst.berekenBezorgTijd();
-            double bezorgPrijs = BezorgDienst.berekenBezorgPrijs(bestelling);
-            System.out.println("De bezorgTijd is: " + bezorgTijd + " minuten. " + " De bezorgPrijs is: " + bezorgPrijs); //De verzendMethode is: .. Brief/ doos
-            System.out.println("Is dit akkoord? (y/n)");
-            String bezorgingAkkoordKeuze = scanner.nextLine();
-            isAkkoordMetBezorging = bezorgingAkkoordKeuze.equals("y");
-
-            if (isAkkoordMetBezorging) {
-                Bezorging bezorgingVanBestelling = new Bezorging(bezorgTijd, bezorgPrijs);
-                bestelling.add(bezorgingVanBestelling);
-            }
+        Bezorging bezorging = kassaMedewerker.vraagVerzendMethode(scanner, bestelling);
+        if(bezorging != null) {
+            bestelling.add(bezorging);
         }
     }
 
@@ -95,7 +82,7 @@ public class Winkel {
 
         while (isNieuweBestelling) {
             toonMenu();
-            Product nieuwItem = kassaMedewerker.voegProductToeAanBestelling();
+            Product nieuwItem = kassaMedewerker.vraagTeBestellenProduct(scanner);
             bestelling.add(nieuwItem);
             double nieuwItemPrijs = nieuwItem.getPrijs();
             System.out.println("De prijs van dit item is: " + currencyFormatter.format(nieuwItemPrijs));

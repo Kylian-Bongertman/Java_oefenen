@@ -1,10 +1,13 @@
 package schonewinkel;
 
+import schonewinkel.Bezorgingen.BezorgDienst;
+import schonewinkel.Bezorgingen.Bezorging;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class KassaMedewerker {
-    public Product voegProductToeAanBestelling() {
-        Scanner scanner = new Scanner(System.in);
+    public Product vraagTeBestellenProduct(Scanner scanner) {
         String besteldProduct = scanner.nextLine();
         String[] frisdrankNamen = FrisdrankMenu.getFrisdrankNamen();
         Double[] frisdrankPrijzen = FrisdrankMenu.getFrisdrankPrijzen();
@@ -31,7 +34,7 @@ public class KassaMedewerker {
                 return durum;
             default:
                 System.out.println("Dit staat niet op het menu!");
-                return voegProductToeAanBestelling();
+                return vraagTeBestellenProduct(scanner);
         }
     }
 
@@ -68,6 +71,26 @@ public class KassaMedewerker {
         }
         System.out.println("Deze saus bestaat niet!");
         return vraagSausKeuze(); //Roep de methode opnieuw aan als de saus niet geldig is.
+    }
+
+    public Bezorging vraagVerzendMethode(Scanner scanner, ArrayList<Product> bestelling) {
+        System.out.println("Wil je je bestelling thuis bezorgd hebben? (y/n)");
+        String bestellingBezorgenKeuze = scanner.nextLine();
+
+        boolean isAkkoordMetBezorging;
+        if (bestellingBezorgenKeuze.equals("y")) {
+            double bezorgTijd = BezorgDienst.berekenBezorgTijd();
+            double bezorgPrijs = BezorgDienst.berekenBezorgPrijs(bestelling);
+            System.out.println("De bezorgTijd is: " + bezorgTijd + " minuten. " + " De bezorgPrijs is: " + bezorgPrijs); //De verzendMethode is: .. Brief/ doos
+            System.out.println("Is dit akkoord? (y/n)");
+            String bezorgingAkkoordKeuze = scanner.nextLine();
+            isAkkoordMetBezorging = bezorgingAkkoordKeuze.equals("y");
+
+            if (isAkkoordMetBezorging) {
+                return new Bezorging(bezorgTijd, bezorgPrijs);
+            }
+        }
+        return null;
     }
 }
 
