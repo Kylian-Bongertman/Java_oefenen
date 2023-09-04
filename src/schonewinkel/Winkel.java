@@ -1,12 +1,10 @@
 package schonewinkel;
 
-import schonewinkel.Bezorgingen.BezorgDienst;
 import schonewinkel.Bezorgingen.Bezorger;
 import schonewinkel.Bezorgingen.Bezorging;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -20,14 +18,14 @@ public class Winkel {
 
     public static void main(String[] args) throws Exception {
         neemBestellingAan();
-        checkKortingsCode();
-        kiesVerzendMethode();
-        printKassaBon(bestelling);
-        stuurBezorger();
+        verwerkKortingCode();
+        verwerkVerzendMethode();
+        printKassaBon();
+        verstuurBezorging();
     }
 
-    private static void stuurBezorger() throws Exception {
-        Bezorging bezorging = vindBezorging(bestelling);
+    private static void verstuurBezorging() throws Exception {
+        Bezorging bezorging = vindBezorging(); //Haalt bezorging object uit de bestelling
 
         if (bezorging != null) {
             System.out.println("De bezorging zal plaatsvinden over: " + bezorging.getBezorgTijd() + " minuten");
@@ -35,39 +33,22 @@ public class Winkel {
         }
     }
 
-    private static void checkKortingsCode() {
-        while (true) {
-            System.out.println("Heeft u een korting code?");
-            String heeftKortingCode = scanner.nextLine();
-            if (heeftKortingCode.equals("y")) {
-                System.out.println("Geef uw korting code op:");
-                String opgegevenKortingCode = scanner.nextLine();
-
-                KortingCodeOpties[] kortingCodes = KortingCodeOpties.values();
-                for (KortingCodeOpties kortingCode : kortingCodes) {
-                    if (opgegevenKortingCode.equals(kortingCode.getNaam())) {
-                        geefKorting(kortingCode);
-                        System.out.println("De korting is toegepast.");
-                        return; // Methode wordt afgebroken als korting code gevonden is.
-                    }
-                }
-                System.out.println("Korting code niet gevonden.");
-            } else {
-                return; // Als de gebruiker "n" invoert, verlaten we de methode zonder verder te vragen.
-            }
-        }
+    private static void verwerkKortingCode() {
+        int kortingPercentage = kassaMedewerker.vraagKortingCode(scanner);
+        geefKorting(kortingPercentage);
+        System.out.println("De korting is toegepast.");
     }
 
-    private static void geefKorting(KortingCodeOpties kortingCode) {
+    private static void geefKorting(int kortingPercentage) {
         double percentageVanOrigineelPrijs;
-        percentageVanOrigineelPrijs = (100 - kortingCode.getKortingPercentage());
+        percentageVanOrigineelPrijs = (100 - kortingPercentage);
         for (Product item : bestelling) {
             double nieuwPrijs = item.getPrijs() * (percentageVanOrigineelPrijs / 100);
             item.setPrijs(nieuwPrijs);
         }
     }
 
-    private static void kiesVerzendMethode() {
+    private static void verwerkVerzendMethode() {
         Bezorging bezorging = kassaMedewerker.vraagVerzendMethode(scanner, bestelling);
         if(bezorging != null) {
             bestelling.add(bezorging);
@@ -93,8 +74,8 @@ public class Winkel {
         }
     }
 
-    private static void printKassaBon(List<Product> bestelling) {
-        double totaalPrijsBestelling = berekenTotaalPrijs(bestelling);
+    private static void printKassaBon() {
+        double totaalPrijsBestelling = berekenTotaalPrijs();
 
         System.out.println("--------------------Bestelling--------------------");
         for (Product item : bestelling) {
@@ -104,7 +85,7 @@ public class Winkel {
         System.out.println("Bedankt voor je bestelling, dat wordt dan: " + currencyFormatter.format(totaalPrijsBestelling));
     }
 
-    private static double berekenTotaalPrijs(List<Product> bestelling) {
+    private static double berekenTotaalPrijs() {
         double totaalPrijsBestelling = 0.0;
         for (Product item : bestelling) {
             totaalPrijsBestelling += item.getPrijs();
@@ -112,7 +93,7 @@ public class Winkel {
         return totaalPrijsBestelling;
     }
 
-    private static Bezorging vindBezorging(List<Product> bestelling) {
+    private static Bezorging vindBezorging() {
         for (Product item : bestelling) {
             if (item instanceof Bezorging) {
                 return (Bezorging) item;

@@ -92,6 +92,27 @@ public class KassaMedewerker {
         }
         return null;
     }
+
+    public int vraagKortingCode(Scanner scanner) {
+        while (true) {
+            System.out.println("Heeft u een korting code?");
+            String heeftKortingCode = scanner.nextLine();
+            if (heeftKortingCode.equals("y")) {
+                System.out.println("Geef uw korting code op:");
+                String opgegevenKortingCode = scanner.nextLine();
+
+                KortingCodeOpties[] kortingCodes = KortingCodeOpties.values();
+                for (KortingCodeOpties kortingCode : kortingCodes) {
+                    if (opgegevenKortingCode.equals(kortingCode.getNaam())) {
+                        return kortingCode.getKortingPercentage();
+                    }
+                }
+                System.out.println("Korting code niet gevonden.");
+            } else {
+                return 0;
+            }
+        }
+    }
 }
 
 
