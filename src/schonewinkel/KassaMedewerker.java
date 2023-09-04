@@ -81,13 +81,14 @@ public class KassaMedewerker {
         if (bestellingBezorgenKeuze.equals("y")) {
             double bezorgTijd = BezorgDienst.berekenBezorgTijd();
             double bezorgPrijs = BezorgDienst.berekenBezorgPrijs(bestelling);
-            System.out.println("De bezorgTijd is: " + bezorgTijd + " minuten. " + " De bezorgPrijs is: " + bezorgPrijs); //De verzendMethode is: .. Brief/ doos
+            String bezorgMethode = BezorgDienst.vindBezorgMethodeNaam(bestelling);
+            System.out.println("De bezorgTijd is: " + bezorgTijd + " minuten. " + " De bezorgPrijs is: " + bezorgPrijs + " De bestelling wordt verzonden in een " + bezorgMethode); //De verzendMethode is: .. Brief/ doos
             System.out.println("Is dit akkoord? (y/n)");
             String bezorgingAkkoordKeuze = scanner.nextLine();
             isAkkoordMetBezorging = bezorgingAkkoordKeuze.equals("y");
 
             if (isAkkoordMetBezorging) {
-                return new Bezorging(bezorgTijd, bezorgPrijs);
+                return new Bezorging(bezorgTijd, bezorgPrijs, bezorgMethode);
             }
         }
         return null;

@@ -35,8 +35,11 @@ public class Winkel {
 
     private static void verwerkKortingCode() {
         int kortingPercentage = kassaMedewerker.vraagKortingCode(scanner);
-        geefKorting(kortingPercentage);
-        System.out.println("De korting is toegepast.");
+
+        if (kortingPercentage != 0) {
+            geefKorting(kortingPercentage);
+            System.out.println("De korting is toegepast.");
+        }
     }
 
     private static void geefKorting(int kortingPercentage) {
