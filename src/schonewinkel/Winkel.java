@@ -36,17 +36,33 @@ public class Winkel {
     }
 
     private static void checkKortingsCode() {
-        System.out.println("Heeft u een korting code?");
-        String inBezitVanKortingsCode = scanner.nextLine();
-        if (inBezitVanKortingsCode.equals("y")) {
-            geefKorting();
-            System.out.println("De korting is toegepast.");
+        while (true) {
+            System.out.println("Heeft u een korting code?");
+            String heeftKortingCode = scanner.nextLine();
+            if (heeftKortingCode.equals("y")) {
+                System.out.println("Geef uw korting code op:");
+                String opgegevenKortingCode = scanner.nextLine();
+
+                KortingCodeOpties[] kortingCodes = KortingCodeOpties.values();
+                for (KortingCodeOpties kortingCode : kortingCodes) {
+                    if (opgegevenKortingCode.equals(kortingCode.getNaam())) {
+                        geefKorting(kortingCode);
+                        System.out.println("De korting is toegepast.");
+                        return; // Methode wordt afgebroken als korting code gevonden is.
+                    }
+                }
+                System.out.println("Korting code niet gevonden.");
+            } else {
+                return; // Als de gebruiker "n" invoert, verlaten we de methode zonder verder te vragen.
+            }
         }
     }
 
-    private static void geefKorting() {
+    private static void geefKorting(KortingCodeOpties kortingCode) {
+        double percentageVanOrigineelPrijs;
+        percentageVanOrigineelPrijs = (100 - kortingCode.getKortingPercentage());
         for (Product item : bestelling) {
-            double nieuwPrijs = item.getPrijs() * 0.8;
+            double nieuwPrijs = item.getPrijs() * (percentageVanOrigineelPrijs / 100);
             item.setPrijs(nieuwPrijs);
         }
     }
