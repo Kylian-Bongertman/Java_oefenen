@@ -1,12 +1,10 @@
 package schonewinkel;
 
-import schonewinkel.Bezorgingen.BezorgDienst;
 import schonewinkel.Bezorgingen.Bezorger;
 import schonewinkel.Bezorgingen.Bezorging;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -16,31 +14,47 @@ public class Winkel {
     private static final KassaMedewerker kassaMedewerker = new KassaMedewerker();
     private static final Bezorger bezorger = new Bezorger();
     private static final Locale locale = new Locale("en", "NL");
-    private static final NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+    public static final NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         neemBestellingAan();
-        kiesVerzendMethode();
-        printKassaBon(bestelling);
+        verwerkKortingCode();
+        verwerkVerzendMethode();
+        printKassaBon();
+        verstuurBezorging();
     }
 
-    private static void kiesVerzendMethode() {
-        System.out.println("Wil je je bestelling thuis bezorgd hebben? (y/n)");
-        String bestellingBezorgenKeuze = scanner.nextLine();
+    private static void verstuurBezorging() {
+        Bezorging bezorging = vindBezorging(); //Haalt bezorging object uit de bestelling
 
-        boolean isAkkoordMetBezorging;
-        if (bestellingBezorgenKeuze.equals("y")) {
-            double bezorgTijd = BezorgDienst.berekenBezorgTijd();
-            double bezorgPrijs = BezorgDienst.berekenBezorgPrijs(bestelling);
-            System.out.println("De bezorgTijd is: " + bezorgTijd + " minuten. " + " De bezorgPrijs is: " + bezorgPrijs); //De verzendMethode is: .. Brief/ doos
-            System.out.println("Is dit akkoord? (y/n)");
-            String bezorgingAkkoordKeuze = scanner.nextLine();
-            isAkkoordMetBezorging = bezorgingAkkoordKeuze.equals("y");
+        if (bezorging != null) {
+            System.out.println("De bezorging zal plaatsvinden over: " + bezorging.getBezorgTijd() + " minuten");
+            startBezorgAnimatie(bezorging.getBezorgTijd());
+        }
+    }
 
-            if (isAkkoordMetBezorging) {
-                Bezorging bezorgingVanBestelling = new Bezorging(bezorgTijd, bezorgPrijs);
-                bestelling.add(bezorgingVanBestelling);
-            }
+    private static void verwerkKortingCode() {
+        int kortingPercentage = kassaMedewerker.vraagKortingCode(scanner);
+
+        if (kortingPercentage != 0) {
+            geefKorting(kortingPercentage);
+            System.out.println("De korting is toegepast.");
+        }
+    }
+
+    private static void geefKorting(int kortingPercentage) {
+        double percentageVanOrigineelPrijs;
+        percentageVanOrigineelPrijs = (100 - kortingPercentage);
+        for (Product item : bestelling) {
+            double nieuwPrijs = item.getPrijs() * (percentageVanOrigineelPrijs / 100);
+            item.setPrijs(nieuwPrijs);
+        }
+    }
+
+    private static void verwerkVerzendMethode() {
+        Bezorging bezorging = kassaMedewerker.vraagVerzendMethode(scanner, bestelling);
+        if(bezorging != null) {
+            bestelling.add(bezorging);
         }
     }
 
@@ -52,7 +66,7 @@ public class Winkel {
 
         while (isNieuweBestelling) {
             toonMenu();
-            Product nieuwItem = kassaMedewerker.voegProductToeAanBestelling();
+            Product nieuwItem = kassaMedewerker.vraagTeBestellenProduct(scanner);
             bestelling.add(nieuwItem);
             double nieuwItemPrijs = nieuwItem.getPrijs();
             System.out.println("De prijs van dit item is: " + currencyFormatter.format(nieuwItemPrijs));
@@ -63,25 +77,18 @@ public class Winkel {
         }
     }
 
-
-    private static void printKassaBon(List<Product> bestelling) throws Exception {
-        double totaalPrijsBestelling = berekenTotaalPrijs(bestelling);
-        Bezorging bezorging = vindBezorging(bestelling);
+    private static void printKassaBon() {
+        double totaalPrijsBestelling = berekenTotaalPrijs();
 
         System.out.println("--------------------Bestelling--------------------");
         for (Product item : bestelling) {
             printProduct(item);
         }
         System.out.println("--------------------------------------------------");
-
-        if (bezorging != null) {
-            System.out.println("De bezorging zal plaatsvinden over: " + bezorging.getBezorgTijd() + " minuten");
-            stuurBezorger(bezorging.getBezorgTijd());
-        }
         System.out.println("Bedankt voor je bestelling, dat wordt dan: " + currencyFormatter.format(totaalPrijsBestelling));
     }
 
-    private static double berekenTotaalPrijs(List<Product> bestelling) {
+    private static double berekenTotaalPrijs() {
         double totaalPrijsBestelling = 0.0;
         for (Product item : bestelling) {
             totaalPrijsBestelling += item.getPrijs();
@@ -89,7 +96,7 @@ public class Winkel {
         return totaalPrijsBestelling;
     }
 
-    private static Bezorging vindBezorging(List<Product> bestelling) {
+    private static Bezorging vindBezorging() {
         for (Product item : bestelling) {
             if (item instanceof Bezorging) {
                 return (Bezorging) item;
@@ -98,7 +105,7 @@ public class Winkel {
         return null;
     }
 
-    private static void stuurBezorger(double minutenOnderweg) throws Exception {
+    private static void startBezorgAnimatie(double minutenOnderweg) {
         bezorger.startBezorgAnimatie(minutenOnderweg);
     }
 
@@ -110,8 +117,7 @@ public class Winkel {
     }
 
     private static void printProduct(Product item) {
-        if (item instanceof DonerProduct) {
-            DonerProduct donerProduct = (DonerProduct) item;
+        if (item instanceof DonerProduct donerProduct) {
             String sausToevoeging = "| Saus: " + donerProduct.getSausNaam();
             System.out.println("Naam: " + item.getNaam() + " " + sausToevoeging + " | prijs: " + currencyFormatter.format(item.getPrijs()));
         } else {

@@ -3,10 +3,13 @@ package schonewinkel.Bezorgingen;
 import schonewinkel.Product;
 
 public class Bezorging extends Product {
-    private double bezorgTijd;
+    private final double bezorgTijd;
+    private final String bezorgMethode;
 
-    public Bezorging(double bezorgTijd, double bezorgPrijs) {
+
+    public Bezorging(double bezorgTijd, double bezorgPrijs, String bezorgMethode) {
         this.bezorgTijd = bezorgTijd;
+        this.bezorgMethode = bezorgMethode;
         prijs = bezorgPrijs;
         naam = "Bezorging";
         volume = 0;
@@ -16,4 +19,7 @@ public class Bezorging extends Product {
         return bezorgTijd;
     }
 
+    public String getBezorgMethode() {
+        return bezorgMethode;
+    }
 }

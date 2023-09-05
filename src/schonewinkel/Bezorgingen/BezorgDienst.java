@@ -17,8 +17,24 @@ public class BezorgDienst {
         double bezorgPrijs = 0.0;
         Bezorging bezorging = selecteerJuisteDoos(bestelling);
 
-        bezorgPrijs += bezorging.getPrijs();
+        if (bezorging != null) {
+            bezorgPrijs += bezorging.getPrijs();
+        } else {
+            System.out.println("Geen geschikte bezorgoptie gevonden voor deze bestelling.");
+        }
         return bezorgPrijs;
+    }
+
+    public static String vindBezorgMethodeNaam(ArrayList<Product> bestelling) {
+        String bezorgMethode = "";
+        Bezorging bezorging = selecteerJuisteDoos(bestelling);
+
+        if (bezorging != null) {
+            bezorgMethode = bezorging.getBezorgMethode();
+        } else {
+            System.out.println("Geen geschikte bezorgoptie gevonden voor deze bestelling.");
+        }
+        return bezorgMethode;
     }
 
     public static double berekenBenodigdeCapaciteit(ArrayList<Product> bestelling) {
@@ -30,11 +46,10 @@ public class BezorgDienst {
     }
 
     public static Bezorging selecteerJuisteDoos(ArrayList<Product> bestelling) {
-        double benodigdeCapacteit = berekenBenodigdeCapaciteit(bestelling);
+        double benodigdeCapaciteit = berekenBenodigdeCapaciteit(bestelling);
         for (BezorgOpties optie : BezorgOpties.values()) {
-            if (optie.getCapaciteit() >= benodigdeCapacteit) {
-                Bezorging bezorging = new Bezorging(berekenBezorgTijd(), optie.getPrijs());
-                return bezorging;
+            if (optie.getCapaciteit() >= benodigdeCapaciteit) {
+                return new Bezorging(berekenBezorgTijd(), optie.getPrijs(), optie.getNaam());
             }
         }
         return null; //crasht als benodigde capaciteit meer is dan 10.
