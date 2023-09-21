@@ -22,7 +22,9 @@ public class Product {
     @Column(nullable = false, unique = false)
     private double volume = 1.0;
 
-    public Product(String naam, double prijs, double volume) {
+    public Product() { //Lege constructor
+    }
+    public Product(String naam, double prijs, double volume) { //Gevulde constructor
         this.naam = naam;
         this.prijs = prijs;
         this.volume = volume;

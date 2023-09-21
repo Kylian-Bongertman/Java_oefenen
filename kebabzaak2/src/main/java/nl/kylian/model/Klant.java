@@ -9,8 +9,8 @@ import javax.persistence.*;
 @Setter
 @Entity
 public class Klant {
-
-    @Id@GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(nullable = false, unique = false)

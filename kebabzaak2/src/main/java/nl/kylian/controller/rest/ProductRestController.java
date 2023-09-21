@@ -36,7 +36,7 @@ public class ProductRestController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Product create(@RequestBody Product product) {
-        Product appel = new Product("appel", 1.0, 1.0);
+//        Product appel = new Product("appel", 1.0, 1.0);
         return productRepository.save(product);
     }
 
@@ -56,5 +56,4 @@ public class ProductRestController {
                 .orElseThrow(ProductNotFoundException::new);
         return productRepository.save(product);
     }
-
 }
